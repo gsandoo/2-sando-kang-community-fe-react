@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoginContainer from "../../components/login/container/LoginContainer";
-import Header from "../../components/login/header/header3";
+import Header from "../../components/login/header/Header3";
 import LoginForm from "../../components/login/LoginForm";
 import LoginButton from "../../components/login/LoginButton";
 import SignUpButton from "../../components/login/SignUpButton";
@@ -10,12 +10,22 @@ import '../../styles/auth/login/login.css';
 
 const Login = () => {
   const [isFormValid, setIsFormValid] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (key, value) => {
+    setFormData((prev) => ({ ...prev, [key]: value }));
+  };
 
   const handleFormValidation = (isValid) => {
     setIsFormValid(isValid);
   };
 
-  const handleLoginSubmit = async ({ email, password }) => {
+  const handleLoginSubmit = async () => {
+    const { email, password } = formData;
+
     try {
       const response = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
@@ -45,26 +55,21 @@ const Login = () => {
       <h2>로그인</h2>
       <div className="login-container">
         <LoginForm
-          onSubmit={handleLoginSubmit}
-          onValidate={handleFormValidation}
+          onInputChange={handleInputChange} 
+          onSubmit={handleLoginSubmit}      
+          onValidate={handleFormValidation} 
         />
       </div>
 
       <div id="login-button">
         <LoginButton
           isActive={isFormValid}
-          onClick={() =>
-            isFormValid &&
-            handleLoginSubmit({
-              email: localStorage.getItem("email"),
-              password: localStorage.getItem("password"),
-            })
-          }
+          onClick={handleLoginSubmit}
         />
       </div>
 
       <div id="signin-button">
-        <SignUpButton onClick={() => handleLocation("/html/signin.html")} />
+        <SignUpButton onClick={() => handleLocation("/signUp")} />
       </div>
     </LoginContainer>
   );

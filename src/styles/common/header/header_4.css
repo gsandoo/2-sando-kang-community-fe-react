@@ -1,12 +1,17 @@
 header {
-
-    padding-bottom: 20px;
-    text-align: center;
-    background-color: #f4f5f7;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 20px;
+    background-color: #f4f5f7;
     border-bottom: 1px solid #000000;
+}
+
+#header-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .head {
@@ -35,7 +40,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 60%;
     height: 10%;
     text-align: center;
     font-size: 32px;

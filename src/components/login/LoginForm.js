@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { emailValidCheck, pwValidCheck } from '../../utils/validation';
 
-const LoginForm = ({ onSubmit, onValidate }) => {
+const LoginForm = ({onInputChange, onSubmit, onValidate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -32,15 +32,24 @@ const LoginForm = ({ onSubmit, onValidate }) => {
     }
 
     setIsFormValid(isValid);
-    onValidate(isValid);
+    onValidate(isValid); // 부모에게 유효성 결과 전달
+    onInputChange("email", email); // 부모 컴포넌트로 이메일 전달
+    onInputChange("password", password);
   };
 
   useEffect(() => {
-    if (email || password) validateForm();
+    if (email || password) validateForm(); // 이메일 또는 비밀번호가 변경될 때마다 유효성 검사
   }, [email, password]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isFormValid) {
+      onSubmit({ email, password }); // 부모 컴포넌트로 이메일과 비밀번호 전달
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="input-group">
         <label htmlFor="email">이메일</label>
         <input
@@ -49,7 +58,7 @@ const LoginForm = ({ onSubmit, onValidate }) => {
           name="email"
           placeholder="이메일을 입력하세요"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)} // 입력값이 변경될 때마다 상태 업데이트
         />
         <div className="error-message">{emailError}</div>
       </div>
@@ -62,10 +71,11 @@ const LoginForm = ({ onSubmit, onValidate }) => {
           name="password"
           placeholder="비밀번호를 입력하세요"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)} // 입력값이 변경될 때마다 상태 업데이트
         />
         <div className="error-message">{passwordError}</div>
       </div>
+
     </form>
   );
 };
