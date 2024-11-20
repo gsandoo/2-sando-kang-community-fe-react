@@ -1,8 +1,5 @@
-
-
 .signup-container {
     width: 20%;
-    margin-left: 40%;
     padding: 20px 0;
 }
 
@@ -52,52 +49,3 @@
     font-size: 14px;
     color: #666;
 }
-
-.signup-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.signup-form label {
-    font-size: 14px;
-    color: #333;
-}
-
-.signup-form input {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#submit-button {
-    padding: 12px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #9074d6;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.7s ease;
-}
-
-.login-link {
-    text-align: center;
-}
-
-.login-link a {
-    font-size: 14px;
-    color: #9074d6;
-    text-decoration: none;
-}
-
-.error-message {
-    text-align: left;
-    color: red;
-    font-size: 0.5em;
-    height: 1em;
-    margin-top: -10px;
-    margin-bottom: 15px;
-  }

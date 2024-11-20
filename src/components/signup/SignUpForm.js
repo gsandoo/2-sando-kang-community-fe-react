@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { emailValidCheck, pwValidCheck } from '../../utils/validation';
-import '../../styles/auth/signup/signup.css';
+import '../../styles/auth/signup/signupForm.css';
 
-const SignUpForm = ({ onInputChange, onSubmit, onValidate }) => {
+const SignUpForm = ({ onInputChange, onSubmit, onValidate, isActive }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -19,10 +19,10 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate }) => {
 
     // 이메일 유효성 검사
     if (!email.trim()) {
-      setEmailError('이메일을 입력하세요.');
+      setEmailError(' *이메일을 입력하세요.');
       isValid = false;
     } else if (!emailValidCheck(email.trim())) {
-      setEmailError('*올바른 이메일 주소 형식을 입력해주세요.');
+      setEmailError(' *올바른 이메일 주소 형식을 입력해주세요.');
       isValid = false;
     } else {
       setEmailError('');
@@ -30,10 +30,10 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate }) => {
 
     // 비밀번호 유효성 검사
     if (!password.trim()) {
-      setPasswordError('비밀번호를 입력하세요.');
+      setPasswordError(' *비밀번호를 입력하세요.');
       isValid = false;
     } else if (!pwValidCheck(password.trim())) {
-      setPasswordError('*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개 포함해야 합니다.');
+      setPasswordError(' *비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개 포함해야 합니다.');
       isValid = false;
     } else {
       setPasswordError('');
@@ -41,7 +41,7 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate }) => {
 
     // 비밀번호 확인 유효성 검사
     if (password !== confirmPassword) {
-      setConfirmPasswordError('비밀번호가 일치하지 않습니다.');
+      setConfirmPasswordError(' *비밀번호가 일치하지 않습니다.');
       isValid = false;
     } else {
       setConfirmPasswordError('');
@@ -49,7 +49,7 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate }) => {
 
     // 닉네임 유효성 검사
     if (!nickname.trim()) {
-      setNicknameError('닉네임을 입력하세요.');
+      setNicknameError(' *닉네임을 입력하세요.');
       isValid = false;
     } else {
       setNicknameError('');
@@ -57,14 +57,13 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate }) => {
 
     setIsFormValid(isValid);
     onValidate(isValid);
+    onInputChange("email", email);
+    onInputChange("password", password);
+    onInputChange("nickname", nickname);
   };
 
   useEffect(() => {
-    validateForm(); // 이메일, 비밀번호, 닉네임, 비밀번호 확인이 변경될 때마다 유효성 검사
-    onInputChange('email', email);
-    onInputChange('password', password);
-    onInputChange('nickname', nickname);
-    onInputChange('confirmPassword', confirmPassword);
+    if (email || password) validateForm();
   }, [email, password, confirmPassword, nickname]);
 
   const handleSubmit = (e) => {
@@ -117,7 +116,10 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate }) => {
         />
         <div className="error-message">{nicknameError}</div>
 
-        <button type="submit" id="submit-button" disabled={!isFormValid}>회원가입</button>
+        <button 
+          type="submit" 
+          className={`signup-button ${isActive ? "active" : ""}`} 
+          disabled={!isFormValid}>회원가입</button>
         </form>
 
         <div className="login-link">

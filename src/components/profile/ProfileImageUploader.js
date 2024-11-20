@@ -5,12 +5,24 @@ const ProfileImageUploader = ({ onImageChange }) => {
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
+
+    console.log(file)
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImagePreview(imageUrl);
-      onImageChange(file); // 부모 컴포넌트로 파일 전달
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageUrl = e.target.result;
+        setImagePreview(imageUrl);
+      };
+      reader.readAsDataURL(file);
+  
+      onImageChange(file); 
     }
   };
+  
+  const handleButtonClick = () => {
+    document.getElementById("fileInput").click(); 
+  };
+
 
   return (
     <div className="profile-section">
@@ -23,7 +35,7 @@ const ProfileImageUploader = ({ onImageChange }) => {
             style={{ display: "block", width: "100px", height: "100px", objectFit: "cover" }}
           />
         ) : (
-          <button className="upload-button" id="uploadButton">
+          <button className="upload-button" id="uploadButton" onClick={handleButtonClick}>
             +
           </button>
         )}

@@ -1,22 +1,21 @@
 // SignUp.js
 
 import React, { useState } from "react";
-import SignUpContainer from "../../components/signup/container/Container_4";
-import Header from "../../components/signup/header/Header4";
+import SignUpContainer from "../../components/container/Container_4";
+import Header from "../../components/header/Header4";
 import ProfileImageUploader from "../../components/profile/ProfileImageUploader";
 import SignUpForm from "../../components/signup/SignUpForm";
-import SignUpButton from "../../components/signup/SignupButton";
 import { handleLocation } from "../../utils/handleLocation";
 import "../../styles/auth/signup/signup.css";
 
 const SignUp = () => {
   const [isFormValid, setIsFormValid] = useState(false);
-  const [imageFile, setImageFile] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
     nickname: "",
+    profile: ""
   });
 
   const handleInputChange = (key, value) => {
@@ -24,7 +23,13 @@ const SignUp = () => {
   };
 
   const handleImageChange = (file) => {
-    setImageFile(file);
+    console.log("받은 파일:", file);
+    if (file) {
+      setFormData((prevData) => ({
+        ...prevData,
+        profile: file, // 파일 객체 저장
+      }));
+    }
   };
 
   const handleFormValidation = (isValid) => {
@@ -32,23 +37,33 @@ const SignUp = () => {
   };
 
   const handleSignUpSubmit = async () => {
-    const { email, password, confirmPassword, nickname } = formData;
+
+
+    const { email, password, nickname, profile } = formData;
+
+    const formDatas = new FormData();
+    formDatas.append("email", email);
+    formDatas.append("password", password);
+    formDatas.append("nickname", nickname);
+    formDatas.append("profile", profile);
+
+    console.log(`email: ${email}`)
+    console.log(`password: ${password}`)
+    console.log(`nickname: ${nickname}`)
+    console.log(`imageFile: ${profile}`)
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/signup', {
+      const response = await fetch('http://localhost:3000/api/auth/signin', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: formDatas
       });
 
       const data = await response.json();
       if (data.success) {
         alert('회원가입이 성공적으로 이루어졌습니다.');
-        handleLocation('/'); // 회원가입 후 로그인 페이지로 이동
+        handleLocation('/');
       } else {
-        alert(`회원가입 실패: ${data.message}`);
+        alert(`회원가입 실패: ${data.message.code}`);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -60,13 +75,15 @@ const SignUp = () => {
     <SignUpContainer>
       <Header title={'아무말 대잔치'}/>
       <h2>회원가입</h2>
-      <ProfileImageUploader onImageChange={handleImageChange} />
-      <SignUpForm
-        onInputChange={handleInputChange}
-        onSubmit={handleSignUpSubmit}
-        onValidate={handleFormValidation}
-      />
-     
+      <div class="signup-container">
+        <ProfileImageUploader onImageChange={handleImageChange} />
+        <SignUpForm
+          onInputChange={handleInputChange}
+          onSubmit={handleSignUpSubmit}
+          onValidate={handleFormValidation}
+          isActive={isFormValid}
+        />
+      </div>
     </SignUpContainer>
   );
 };

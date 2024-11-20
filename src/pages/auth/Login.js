@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import LoginContainer from "../../components/login/container/LoginContainer";
-import Header from "../../components/login/header/Header3";
+import LoginContainer from "../../components/container/LoginContainer";
+import Header from "../../components/header/Header3";
 import LoginForm from "../../components/login/LoginForm";
 import LoginButton from "../../components/login/LoginButton";
 import SignUpButton from "../../components/login/SignUpButton";
@@ -39,7 +39,7 @@ const Login = () => {
       if (data.success) {
         alert("로그인이 정상적으로 이루어졌습니다.");
         localStorage.setItem("userId", data.data.user_id);
-        handleLocation("/html/Posts.html");
+        handleLocation("/posts");
       } else {
         alert(`로그인이 되지 않았습니다: ${data.message.code}`);
       }
@@ -69,7 +69,7 @@ const Login = () => {
       </div>
 
       <div id="signin-button">
-        <SignUpButton onClick={() => handleLocation("/signUp")} />
+        <SignUpButton onClick={() => handleLocation("/signup")} />
       </div>
     </LoginContainer>
   );
