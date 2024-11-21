@@ -49,7 +49,7 @@ const LoginForm = ({onInputChange, onSubmit, onValidate }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="login-field" onSubmit={handleSubmit}>
       <div className="input-group">
         <label htmlFor="email">이메일</label>
         <input

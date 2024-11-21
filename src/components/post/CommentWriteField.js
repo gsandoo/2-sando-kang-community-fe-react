@@ -6,11 +6,11 @@ const CommentWriteField = ({ onAddComment, initialComment, onEditComment }) => {
   // 댓글 수정 시 초기 댓글 내용이 textarea에 표시되도록 처리
   useEffect(() => {
     if (initialComment) {
-      setCommentContent(initialComment.content); // 수정하려는 댓글 내용을 설정
+      setCommentContent(initialComment.content); 
     } else {
-      setCommentContent(""); // 새로운 댓글 작성 시 textarea 초기화
+      setCommentContent(""); 
     }
-  }, [initialComment]); // initialComment이 변경될 때마다 textarea 내용을 업데이트
+  }, [initialComment]); 
 
   // 댓글 내용 변경 처리
   const handleCommentChange = (event) => {
@@ -25,27 +25,28 @@ const CommentWriteField = ({ onAddComment, initialComment, onEditComment }) => {
     }
 
     if (initialComment) {
-      // 댓글 수정 로직
+     
       const response = await fetch("http://localhost:3000/api/comment", {
-        method: "PUT", // 댓글 수정 요청
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          commentId: initialComment.id,
+          comment_id: initialComment.id,
           content: commentContent,
         }),
       });
       const data = await response.json();
       if (data.success) {
         alert("댓글이 수정되었습니다.");
-        onEditComment(null); // 수정 후 초기화
+        onEditComment(null); 
+        window.location.reload();
       } else {
         alert("댓글 수정 실패:", data.message);
       }
     } else {
-      // 댓글 등록 로직
-      await onAddComment(commentContent); // 댓글 등록 API 호출
+ 
+      await onAddComment(commentContent); 
     }
 
     setCommentContent(""); // 댓글 작성 후 textarea 초기화

@@ -8,8 +8,7 @@ h2 {
 }
 
 form {
-    width: 60%;
-    margin-left: 20%;
+    width: 40%;
     display: flex;
     flex-direction: column;
 }
@@ -42,16 +41,19 @@ textarea {
     width: 100%;
 }
 
-#image{
-    width: 30%;
-}
+
 
 .file{
-    width: 30%;
+    width: 9%;
+}
+
+#image{
+    width: 100%;
+    overflow: hidden;
 }
 
 .file-name {
-    width: 70%;
+    width: 90%;
     font-size: 14px;
     color: #888;
     margin-left: 10px;

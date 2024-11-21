@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { getLocalStorage } from "../../utils/session";
+import { getCurrentDate } from "../../utils/getCurrentDate";
+
+
 import MakePostHeader from "../header/Header5";
 import PostField from "../post/PostField";
 import CommentWriteField from "../post/CommentWriteField";
@@ -9,6 +13,7 @@ import CommentModal from "../post/CommentModal";
 import '../../styles/common/container/container.css';
 import '../../styles/common/header/header_5.css';
 import '../../styles/post/post.css';
+
 
 const PostContainer = () => {
   const [postData, setPostData] = useState(null);
@@ -31,7 +36,7 @@ const PostContainer = () => {
           
           if (responseData && responseData.data.postData) {
             const data = responseData.data.postData;
-            console.log(`title : ${data.comments}`);
+            console.log(`comments : ${data.comment}`);
             setPostData(responseData.data.postData);
             setComments(responseData.data.postData.comment || []); // comment 필드 확인
           } else {
@@ -48,8 +53,13 @@ const PostContainer = () => {
 
   // 댓글 추가
   const addComment = async (commentContent) => {
-    const userId = localStorage.getItem("userId");
-    const postId = localStorage.getItem("postId");
+    const userId = getLocalStorage("userId");
+    const postDetails = JSON.parse(localStorage.getItem('postDetails'));
+    const postId = postDetails.id;
+    console.log(`userId:  ${userId}`);
+    console.log(`postId:  ${postId}`);
+
+
     try {
       const response = await fetch("http://localhost:3000/api/comment", {
         method: "POST",
@@ -58,13 +68,14 @@ const PostContainer = () => {
           user_id: userId,
           post_id: postId,
           comment: commentContent,
-          date: new Date().toISOString(),
+          date: getCurrentDate(),
         }),
       });
       const data = await response.json();
       if (data.success) {
         alert("댓글이 추가되었습니다!");
         setComments([...comments, data.comment]); // 댓글 목록 갱신
+        window.location.reload();
       } else {
         alert("댓글 추가 실패:", data.message);
       }

@@ -1,9 +1,14 @@
 import React from 'react';
+import { handleLocation } from '../../utils/handleLocation';
 
 const MakePostHeader = ({ title }) => {
   const handleBack = () => {
     window.history.go(-1);
   };
+
+  const handleProfile = () => {
+    handleLocation('/profile');
+  }
 
   return (
     <header>
@@ -16,11 +21,11 @@ const MakePostHeader = ({ title }) => {
           <div className="title">
             <h1>{title}</h1>
           </div>
-          <div className="icon">
+          <div className="icon" onClick={handleProfile}>
             <img src="/src/assets/images/logo/board-list-icon.png" alt="사용자 아이콘" className="user-icon" />
           </div>
         </div>
-      </header>
+    </header>
   );
 };
 
