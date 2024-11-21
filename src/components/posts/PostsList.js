@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { saveLocalStorage } from "../../utils/session";
+import { handleLocation } from "../../utils/handleLocation";
 
 const PostsList = () => {
   const [posts, setPosts] = useState([]);
@@ -74,8 +76,8 @@ useEffect(() => {
 };
 
 const handlePostClick = (post) => {
-  localStorage.setItem("postDetails", JSON.stringify(post));
-  window.location.href = "/html/post.html"; // handleLocation 대체
+  saveLocalStorage("postDetails", JSON.stringify(post));
+  handleLocation("/post"); 
 };
 
 const formatNumber = (num) => {

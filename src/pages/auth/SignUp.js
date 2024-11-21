@@ -1,5 +1,3 @@
-// SignUp.js
-
 import React, { useState } from "react";
 import SignUpContainer from "../../components/container/Container_4";
 import Header from "../../components/header/Header4";

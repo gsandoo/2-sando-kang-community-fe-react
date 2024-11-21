@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/auth/Login'; // Login.js의 경로
+import Login from './pages/auth/Login'; 
 import SignUp from './pages/auth/Signup';
 import Posts from './pages/Posts';
+import Post from './pages/Post';
 import MakePost from './pages/MakePost';
+import EditPost from './pages/EditPost';
 
 
 
@@ -16,7 +18,8 @@ function App() {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/posts" element={<Posts/>} />
         <Route path="/post/make" element={<MakePost/>} />
-        <Route path="/posts/edit" element={<Posts/>} />
+        <Route path="/post" element={<Post/>} />
+        <Route path="/post/edit" element={<EditPost/>} />
       </Routes>
     </BrowserRouter>
   );
