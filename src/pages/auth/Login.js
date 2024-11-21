@@ -38,10 +38,13 @@ const Login = () => {
 
       const data = await response.json();
       if (data.success) {
+
+
         alert("로그인이 정상적으로 이루어졌습니다.");
         saveLocalStorage("userId", data.data.user_id);
         saveLocalStorage("email", data.data.email);
         saveLocalStorage("profile", data.data.profile);
+        saveLocalStorage("nickname", data.data.nickname);
         handleLocation("/posts");
       } else {
         alert(`로그인이 되지 않았습니다: ${data.message.code}`);

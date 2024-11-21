@@ -1,8 +1,6 @@
-// Profile.js
-
 import React, { useState } from 'react';
 import ProfileContainer from '../components/container/ProfileContainer';
-import ProfileHeader from '../components/header/Header6';
+import ProfileHeader from '../components/header/Header6'; 
 import ProfileForm from '../components/profile/ProfileForm';
 import ProfileUpdateButton from '../components/profile/ProfileUpdateButton';
 import WithdrawButton from '../components/profile/WithdrawButton';
@@ -19,7 +17,7 @@ const Profile = () => {
 
   return (
     <ProfileContainer>
-      <ProfileHeader title="아무 말 대잔치" />
+      <ProfileHeader title="회원 정보 수정" />
       <ProfileForm nickname={nickname} setNickname={setNickname} setError={setError} error={error} />
       <ProfileUpdateButton nickname={nickname} setNickname={setNickname} setError={setError} error={error} />
       <WithdrawButton />

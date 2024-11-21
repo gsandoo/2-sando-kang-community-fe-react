@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { handleLocation } from '../../utils/handleLocation';
+import { getLocalStorage } from '../../utils/session';
 
 const MakePostHeader = ({ title }) => {
+
+  const [profile, setProfile] = useState(null);
+
   const handleBack = () => {
     window.history.go(-1);
   };
+
+  useEffect(() => {
+     const profileData = getLocalStorage('profile'); // localStorage에서 프로필 데이터 가져오기
+     console.log(`profile: ${profileData}`);
+     if (profileData) {
+      
+      setProfile(profileData); 
+    } 
+  },[]);
+  
 
   const handleProfile = () => {
     handleLocation('/profile');
@@ -22,7 +36,7 @@ const MakePostHeader = ({ title }) => {
             <h1>{title}</h1>
           </div>
           <div className="icon" onClick={handleProfile}>
-            <img src="/src/assets/images/logo/board-list-icon.png" alt="사용자 아이콘" className="user-icon" />
+            <img src={profile} alt="사용자 아이콘" className="user-icon" />
           </div>
         </div>
     </header>

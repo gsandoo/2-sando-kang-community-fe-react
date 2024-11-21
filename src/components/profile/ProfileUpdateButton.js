@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { getLocalStorage,saveLocalStorage } from '../../utils/session';
-const ProfileUpdateButton = ({ nickname, setNickname, setError, error }) => {
+const ProfileUpdateButton = ({ nickname, image, setError, error }) => {
   const [toastVisible, setToastVisible] = useState(false);
  
   // 수정하기 버튼 클릭 시 처리

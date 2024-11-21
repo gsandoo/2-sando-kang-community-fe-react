@@ -7,6 +7,7 @@ import Post from './pages/Post';
 import MakePost from './pages/MakePost';
 import EditPost from './pages/EditPost';
 import Profile from './pages/Profile';
+import Password from './pages/auth/Password';
 
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/post" element={<Post/>} />
         <Route path="/post/edit" element={<EditPost/>} />
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/password" element={<Password/>}/>
       </Routes>
     </BrowserRouter>
   );

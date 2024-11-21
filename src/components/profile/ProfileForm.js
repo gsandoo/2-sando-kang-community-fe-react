@@ -1,8 +1,7 @@
-// ProfileForm.js
-
 import React, { useState, useEffect } from 'react';
 import { getLocalStorage } from '../../utils/session';
 import { nicknameValidCheck } from '../../utils/validation';
+
 
 const ProfileForm = ({ nickname, setNickname, setError, error }) => {
   const [localEmail, setLocalEmail] = useState('');

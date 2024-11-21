@@ -3,7 +3,6 @@
 }
 
 .dropdown-menu {
-    display: none;
     position: absolute;
     background-color: white;
     border: 1px solid #ccc;
@@ -189,7 +188,7 @@ main{
 }
 
 .modal {
-    display: none;
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
