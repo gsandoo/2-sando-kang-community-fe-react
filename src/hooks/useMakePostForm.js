@@ -9,7 +9,6 @@ const useMakePostForm = () => {
     image: null,
   });
 
-  // Form data 변경 핸들러
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData({
@@ -20,12 +19,10 @@ const useMakePostForm = () => {
     saveLocalStorage(name, files ? files[0].name : value);
   };
 
-  // 폼 유효성 검사
   const validateForm = () => {
     return formData.title.trim() && formData.content.trim();
   };
 
-  // 폼 제출 핸들러
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = getLocalStorage('userId');

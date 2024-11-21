@@ -24,7 +24,7 @@ const usePost = () => {
             const data = responseData.data.postData;
             console.log(`comments : ${data.comment}`);
             setPostData(responseData.data.postData);
-            setComments(responseData.data.postData.comment || []); // comment 필드 확인
+            setComments(responseData.data.postData.comment || []); 
           } else {
             console.error("유효하지 않은 데이터:", responseData);
           }
@@ -78,7 +78,7 @@ const usePost = () => {
       const data = await response.json();
       if (data.success) {
         alert("댓글이 삭제되었습니다.");
-        setComments(comments.filter((comment) => comment.id !== commentId)); // 댓글 목록 갱신
+        setComments(comments.filter((comment) => comment.id !== commentId));
       } else {
         alert("댓글 삭제 실패:", data.message);
       }
