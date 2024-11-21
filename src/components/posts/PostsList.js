@@ -16,7 +16,7 @@ const PostsList = () => {
         const response = await fetch(`http://localhost:3000/api/post?page=${page}`);
         const data = await response.json();
 
-        if (data.success && data.data.postData.length > 0) {
+        if (data.success && data.data.postData.length > 1) {
             setPosts((prevPosts) => [...prevPosts, ...data.data.postData]);
             setPage((prevPage) => prevPage + 1); // 다음 페이지로 이동
         } else if (data.data.postData.length === 0) {

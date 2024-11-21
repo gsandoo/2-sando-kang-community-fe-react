@@ -1,16 +1,24 @@
 import React from "react";
+import { getLocalStorage } from "../../utils/session";
+import { handleLocation } from "../../utils/handleLocation";
 import "../../styles/common/header/header_1.css";
 
 const Header1 = ({ title }) => {
+    const image = getLocalStorage('profile');
+    console.log(`image : ${image}`);
+
+    const handleProfile = () => {
+        handleLocation('/profile');
+      }
   return (
     <>
     <header>
         <div class="head">
                 <div class="title">
-                    <h4>아무 말 대잔치</h4>
+                    <h4>{title}</h4>
                 </div>
                 <div class="avatar">
-                    <img src="/src/assets/images/logo/board-list-icon.png" alt="profile" />
+                    <img src={image} alt="profile" onClick={handleProfile}/>
                 </div>
         </div>;
     </header> 

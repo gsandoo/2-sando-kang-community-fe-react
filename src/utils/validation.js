@@ -37,3 +37,21 @@ export function emailValidCheck(email) {
     }
   }
   
+export function validateNickname(nickname, setError) {
+  if (!nickname) {
+    setError('  *닉네임을 입력해주세요.');
+    return false;
+  } else if (/\s/.test(nickname)) {
+    setError('  *띄어쓰기를 없애주세요.');
+    return false;
+  } else if (nickname.length > 10) {
+    setError('  *닉네임 최대 10자까지 가능합니다.');
+    return false;
+  } else if (nickname === document.getElementById('nickname').placeholder) {
+    setError('  *중복된 닉네임 입니다');
+    return false;
+  } else {
+    setError('');
+    return true;
+  }
+}

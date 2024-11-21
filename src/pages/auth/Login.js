@@ -5,6 +5,7 @@ import LoginForm from "../../components/login/LoginForm";
 import LoginButton from "../../components/login/LoginButton";
 import SignUpButton from "../../components/login/SignUpButton";
 import { handleLocation } from "../../utils/handleLocation";
+import { saveLocalStorage } from "../../utils/session";
 
 import '../../styles/auth/login/login.css';
 
@@ -38,7 +39,9 @@ const Login = () => {
       const data = await response.json();
       if (data.success) {
         alert("로그인이 정상적으로 이루어졌습니다.");
-        localStorage.setItem("userId", data.data.user_id);
+        saveLocalStorage("userId", data.data.user_id);
+        saveLocalStorage("email", data.data.email);
+        saveLocalStorage("profile", data.data.profile);
         handleLocation("/posts");
       } else {
         alert(`로그인이 되지 않았습니다: ${data.message.code}`);

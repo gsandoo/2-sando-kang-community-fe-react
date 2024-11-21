@@ -1,6 +1,7 @@
 .signup-container {
-    width: 20%;
+    width: 30%;
     padding: 20px 0;
+  
 }
 
 .signup-container h2 {
@@ -48,4 +49,13 @@
     margin-top: 10px;
     font-size: 14px;
     color: #666;
+}
+
+.error-message-signup{
+    margin-top: 0;
+    text-align: left;
+    color: red;
+    font-size: 0.5em;
+    height: 1em;
+    display: block;
 }

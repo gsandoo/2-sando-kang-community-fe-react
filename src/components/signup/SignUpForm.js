@@ -79,12 +79,12 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate, isActive }) => {
         <label htmlFor="email">이메일</label>
         <input
             type="email"
-            id="email"
+            id="email-signup"
             placeholder="이메일을 입력하세요"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
         />
-        <div className="error-message">{emailError}</div>
+        {emailError &&<div className="error-message-signup">{emailError}</div>}
 
         <label htmlFor="password">비밀번호</label>
         <input
@@ -94,7 +94,7 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate, isActive }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
         />
-        <div className="error-message">{passwordError}</div>
+        {passwordError && <div className="error-message-signup">{passwordError}</div>}
 
         <label htmlFor="confirm-password">비밀번호 확인</label>
         <input
@@ -104,7 +104,7 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate, isActive }) => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <div className="error-message">{confirmPasswordError}</div>
+        <div className="error-message-signup">{confirmPasswordError}</div>
 
         <label htmlFor="nickname">닉네임</label>
         <input
@@ -114,7 +114,7 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate, isActive }) => {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
         />
-        <div className="error-message">{nicknameError}</div>
+        <div className="error-message-signup">{nicknameError}</div>
 
         <button 
           type="submit" 
