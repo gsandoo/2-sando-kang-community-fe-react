@@ -16,8 +16,9 @@ const usePost = () => {
       if (postDetails) {
         const postId = postDetails.id;
         console.log(`post id : ${postId}`);
+        console.log(`post details : ${[postDetails.profile]}`);
         try {
-          const response = await fetch(`http://localhost:3000/api/post/${postId}`);
+          const response = await fetch(`/api/post/${postId}`);
           const responseData = await response.json();
           
           if (responseData && responseData.data.postData) {
@@ -45,7 +46,7 @@ const usePost = () => {
     console.log(`postId:  ${postId}`);
 
     try {
-      const response = await fetch("http://localhost:3000/api/comment", {
+      const response = await fetch("/api/comment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -69,18 +70,19 @@ const usePost = () => {
 
   const deleteComment = async (commentId) => {
     const postId = localStorage.getItem("postId");
+    const userId = localStorage.getItem("userId");
     try {
-      const response = await fetch("http://localhost:3000/api/comment", {
+      const response = await fetch("/api/comment", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ comment: commentId, post_id: postId }),
+        body: JSON.stringify({ user_id: userId, comment_id: commentId, post_id: postId }),
       });
       const data = await response.json();
       if (data.success) {
-        alert("댓글이 삭제되었습니다.");
+        alert(`${data.data}`);
         setComments(comments.filter((comment) => comment.id !== commentId));
       } else {
-        alert("댓글 삭제 실패:", data.message);
+        alert(`${data.data}`);
       }
     } catch (error) {
       console.error("댓글 삭제 오류:", error);

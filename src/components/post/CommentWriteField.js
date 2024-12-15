@@ -26,7 +26,7 @@ const CommentWriteField = ({ onAddComment, initialComment, onEditComment }) => {
 
     if (initialComment) {
      
-      const response = await fetch("http://localhost:3000/api/comment", {
+      const response = await fetch("/api/comment", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

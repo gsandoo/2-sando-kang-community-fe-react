@@ -2,29 +2,37 @@ import React, { useState } from 'react';
 import { handleLocation } from '../../utils/handleLocation';
 import { getLocalStorage, saveLocalStorage } from '../../utils/session';
 
-const ProfileUpdateButton = ({ nickname, setError, error }) => {
+const ProfileUpdateButton = ({ nickname, setError, error, file }) => {
   const [toastVisible, setToastVisible] = useState(false);
- 
+
   const handleUpdate = async () => {
-    console.log(`nickname : ${nickname}`)
+    console.log('닉네임:', nickname);
+    console.log('파일:', file);
+
+    if (!file) {
+      console.error('파일이 전달되지 않았습니다.');
+      setError('파일을 선택해 주세요.');
+      return;
+    }
+
+    const formData = new FormData();
+    const userId = getLocalStorage('userId');
     try {
-      const userId = getLocalStorage('userId');
-      const response = await fetch('http://localhost:3000/api/auth/nickname', {
+      formData.append('user_id', userId);
+      formData.append('nickname', nickname);
+      formData.append('profile', file);
+
+      const response = await fetch('/api/auth/nickname', {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          nickname: nickname, 
-        }),
+        body: formData,
       });
 
       if (response.ok) {
         alert('닉네임 수정 성공');
-        setToastVisible(true); 
-        setTimeout(() => setToastVisible(false), 2000); 
+        setToastVisible(true);
+        setTimeout(() => setToastVisible(false), 2000);
         saveLocalStorage('nickname', nickname);
+        saveLocalStorage('profile',file);
         handleLocation('/Posts');
       } else {
         const errorData = await response.json();

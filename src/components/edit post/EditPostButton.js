@@ -16,15 +16,6 @@ function EditPostButton() {
     const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     const formData = new FormData();
-
-    console.log(`userId : ${userId}`);
-    console.log(`postId : ${postId}`);
-    console.log(`title : ${title}`);
-    console.log(`content : ${content}`);
-    console.log(`image : ${image}`);
-    console.log(`date : ${date}`);
-    
-
     formData.append('user_id', userId);
     formData.append('post_id', postId);
     formData.append('title', title);
@@ -33,11 +24,12 @@ function EditPostButton() {
     formData.append('image', image);
 
     try {
-      const response = await fetch('http://localhost:3000/api/post', {
+      const response = await fetch('/api/post', {
         method: 'PUT',
         body: formData,
       });
       const data = await response.json();
+      console.log(data);
       if (data.success) {
         alert('게시글 수정이 완료되었습니다.');
         saveLocalStorage('title', title);
@@ -45,7 +37,7 @@ function EditPostButton() {
         saveLocalStorage('updatePostDate', date);
         handleLocation('/posts');
       } else {
-        alert(`게시글 수정 중 문제가 발생하였습니다. ${data.message}`);
+        alert(`${data.data}`);
       }
     } catch (error) {
       console.error('Error:', error);
