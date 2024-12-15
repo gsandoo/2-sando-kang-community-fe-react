@@ -30,12 +30,20 @@ jobs:
         docker cp react-static-build-container:/app/build ./build
         docker rm react-static-build-container
 
-    # 4. S3에 정적 파일 업로드
+    # 4. 디버깅: 빌드 결과 확인
+    - name: Verify build directory
+      run: ls -al ./build
+
+    # 5. S3에 정적 파일 업로드
     - name: Deploy to S3
       run: |
         aws s3 sync ./build/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
 
-    # 5. CloudFront 캐시 무효화
+    # 6. 디버깅: S3 업로드 확인
+    - name: Verify S3 sync
+      run: aws s3 ls s3://${{ secrets.S3_BUCKET_NAME }}
+
+    # 7. CloudFront 캐시 무효화
     - name: Invalidate CloudFront cache
       run: |
         aws cloudfront create-invalidation \
