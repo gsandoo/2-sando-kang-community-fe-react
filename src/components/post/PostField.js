@@ -5,7 +5,8 @@ import { handleLocation } from '../../utils/handleLocation';
 import '../../styles/post/post.css';
 
 const PostField = ({ post }) => {
-  const image = getLocalStorage('profile');
+  const postDetails = JSON.parse(localStorage.getItem('postDetails'));
+  const profile = postDetails.profile;
 
   const handleModify = () => {
     saveLocalStorage("editTitle", post.title);
@@ -85,7 +86,7 @@ const PostField = ({ post }) => {
         
         <div className="author">
           <div className="avatar">
-            <img src={image || "/assets/images/default-avatar.png"} alt="avatar" />
+            <img src={profile || "/assets/images/default-avatar.png"} alt="avatar" />
           </div>
           <div className="author-info">
             <span className="author-name">{post.author || "알 수 없음"}</span>

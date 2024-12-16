@@ -43,10 +43,10 @@ const useMakePostForm = () => {
       const data = await response.json();
 
       if (data.success) {
-        alert('게시글 작성이 완료되었습니다!');
+        alert(`게시글 작성이 완료되었습니다`);
         handleLocation('/posts');
       } else {
-        alert('게시글 작성에 실패했습니다.');
+        alert(`이미지는 JPG, PNG, GIF만 허용됩니다.`);
       }
     } catch (error) {
       console.error('Error:', error);
