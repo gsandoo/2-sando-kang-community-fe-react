@@ -6,7 +6,6 @@ import '../../styles/post/post.css';
 
 const PostField = ({ post }) => {
   const image = getLocalStorage('profile');
-  console.log(`image : ${image}`);
 
   const handleModify = () => {
     saveLocalStorage("editTitle", post.title);
@@ -48,7 +47,11 @@ const PostField = ({ post }) => {
 
   const handleLike = async () => {
     const postId = post.post_id;
-    const userId = getLocalStorage('userId'); 
+    const userId = getLocalStorage('userId');
+    
+    console.log(`postId: ${postId}`);
+    console.log(`userId:${userId}`);
+
     try {
       const response = await fetch(`/api/post`, {
         method: 'PATCH',

@@ -58,10 +58,10 @@ const usePost = () => {
       });
       const data = await response.json();
       if (data.success) {
-        alert("댓글이 추가되었습니다!");
+        alert(`${data.data}`);
         window.location.reload();
       } else {
-        alert("댓글 추가 실패:", data.message);
+        alert(`${data.data}`);
       }
     } catch (error) {
       console.error("댓글 추가 오류:", error);
@@ -69,18 +69,23 @@ const usePost = () => {
   };
 
   const deleteComment = async (commentId) => {
-    const postId = localStorage.getItem("postId");
+    const postId = JSON.parse(localStorage.getItem("postDetails")).id;
     const userId = localStorage.getItem("userId");
+
+    console.log(`userId: ${userId}`);
+    console.log(`postId: ${postId}`);
+    console.log(`commentId: ${commentId}`);
     try {
       const response = await fetch("/api/comment", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: userId, comment_id: commentId, post_id: postId }),
+        body: JSON.stringify({ user_id: userId, comment_id: `${commentId}`, post_id: postId }),
       });
       const data = await response.json();
       if (data.success) {
         alert(`${data.data}`);
         setComments(comments.filter((comment) => comment.id !== commentId));
+        window.location.reload();
       } else {
         alert(`${data.data}`);
       }

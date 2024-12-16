@@ -8,42 +8,52 @@ const ProfileUpdateButton = ({ nickname, setError, error, file }) => {
   const handleUpdate = async () => {
     console.log('닉네임:', nickname);
     console.log('파일:', file);
-
+  
     if (!file) {
       console.error('파일이 전달되지 않았습니다.');
       setError('파일을 선택해 주세요.');
       return;
     }
-
+  
     const formData = new FormData();
     const userId = getLocalStorage('userId');
     try {
       formData.append('user_id', userId);
       formData.append('nickname', nickname);
       formData.append('profile', file);
-
+  
       const response = await fetch('/api/auth/nickname', {
         method: 'PATCH',
         body: formData,
       });
-
-      if (response.ok) {
-        alert('닉네임 수정 성공');
+      const data = await response.json();
+  
+      if (data.success) {
+        alert(`프로필 수정이 완료되었습니다`);
         setToastVisible(true);
         setTimeout(() => setToastVisible(false), 2000);
         saveLocalStorage('nickname', nickname);
-        saveLocalStorage('profile',file);
+  
+        // FileReader로 파일을 Base64로 변환 후 저장
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const base64Data = e.target.result;
+          console.log('Base64로 변환된 데이터:', base64Data);
+          saveLocalStorage('profile', base64Data); // Base64 데이터 저장
+        };
+        reader.readAsDataURL(file); // Base64 변환 실행
         handleLocation('/Posts');
       } else {
-        const errorData = await response.json();
-        setError(errorData.message || '닉네임 수정 실패');
+        alert(`프로필 수정 중 에러가 발생하였습니다`);
+        setError(data.message || '닉네임 수정 실패');
       }
     } catch (error) {
       console.error('Error:', error);
-      setError('서버와의 통신 오류');
+      alert(`JPG, PNG, GIF만 허용됩니다.`);
+      window.location.reload();
     }
   };
-
+  
   return (
     <div className="profile-field">
       <button id="updateButton" onClick={handleUpdate}>
