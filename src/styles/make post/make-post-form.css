@@ -8,8 +8,8 @@ h2 {
     margin-bottom: 20px;
 }
 
-form {
-    width: 30%;
+.make-form {
+    width: 35%;
     display: flex;
     flex-direction: column;
 }
@@ -42,7 +42,7 @@ textarea {
 }
 
 #image-make {
-    width:9% ;
+    width:13% ;
 }
 
 .file-name {

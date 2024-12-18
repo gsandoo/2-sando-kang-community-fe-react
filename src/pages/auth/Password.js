@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import ProfileContainer from '../../components/container/ProfileContainer';
+import ProfileContainer from '../../components/container/profile-container';
 import ProfileHeader from '../../components/header/profile-header'; 
 import PasswordForm from '../../components/profile/PasswordForm'; 
 import ToastMessage from '../../components/profile/ToastMessage';
 
 import '../../styles/common/container/profile-container.css';
-import '../../styles/common/header/header_5.css';
 import '../../styles/profile/profile.css';
 import '../../styles/auth/password/password.css';
 

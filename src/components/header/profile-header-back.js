@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { getLocalStorage } from '../../utils/session';
 import { handleLocation } from '../../utils/handleLocation';
 
-import '../../styles/common/header/profile-header.css';
+import '../../styles/common/header/profile-header-back.css';
 
-const ProfileHeader = ({ title }) => {
+const ProfileHeaderBack = ({ title }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const profile = getLocalStorage('profile');
@@ -14,6 +14,10 @@ const ProfileHeader = ({ title }) => {
   
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
+  };
+
+  const handleBack = () => {
+    window.history.go(-1);
   };
 
   const logout = (event) => {
@@ -51,6 +55,11 @@ const ProfileHeader = ({ title }) => {
   return (
     <header className="profile-header">
       <div className="profile-head">
+        <div className="back">
+          <button className="page-back" onClick={handleBack}>
+            {'<'}
+          </button>
+        </div>
         <h1 className="title">{title}</h1>
         <div className="avatar" onClick={toggleDropdown}>
           <img src={profile} alt="Profile" />
@@ -67,4 +76,4 @@ const ProfileHeader = ({ title }) => {
   );
 };
 
-export default ProfileHeader;
+export default ProfileHeaderBack;

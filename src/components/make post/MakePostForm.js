@@ -6,7 +6,7 @@ const MakePostForm = () => {
   const { formData, handleChange, validateForm, handleSubmit } = useMakePostForm();
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className= "make-form">
       <label htmlFor="title">제목*</label>
       <input
         type="text"

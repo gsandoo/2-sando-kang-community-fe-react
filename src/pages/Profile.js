@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getLocalStorage } from '../utils/session';
 import { handleLocation } from '../utils/handleLocation';
-import ProfileContainer from '../components/container/ProfileContainer';
+import ProfileContainer from '../components/container/profile-container';
 import ProfileHeader from '../components/header/profile-header'; 
 import ProfileUpdateButton from '../components/profile/ProfileUpdateButton';
 import WithdrawButton from '../components/profile/WithdrawButton';
@@ -10,7 +10,6 @@ import ToastMessage from '../components/profile/ToastMessage';
 import ProfileForm from '../components/profile/ProfileForm';
 
 import '../styles/common/container/profile-container.css';
-import '../styles/common/header/header_5.css';
 import '../styles/profile/profile.css';
 import ProfileImage from '../components/profile/ProfileImage';
 

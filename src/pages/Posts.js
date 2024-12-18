@@ -1,5 +1,5 @@
 import React from "react";
-import PostContainer from "../components/container/Container";
+import PostsContainer from "../components/container/posts-container";
 import ProfileHeader from "../components/header/profile-header";
 import PostWriteButton from "../components/posts/PostWriteButton";
 import PostsList from "../components/posts/PostsList";
@@ -7,7 +7,7 @@ import "../styles/posts/posts.css";
 
 const Posts = () => {
   return (
-    <PostContainer>
+    <PostsContainer>
       <ProfileHeader title="아무 말 대잔치" />
       <section className="intro">
         <div className="intro-word">
@@ -21,7 +21,7 @@ const Posts = () => {
       <section className="posts" id="posts">
         <PostsList />
       </section>
-    </PostContainer>
+    </PostsContainer>
   );
 };
 

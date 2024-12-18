@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SignUpContainer from "../../components/container/profile-container";
+import ProfileContainer from "../../components/container/profile-container";
 import Header from "../../components/header/Header4";
 import ProfileImageUploader from "../../components/profile/ProfileImageUploader";
 import SignUpForm from "../../components/signup/SignUpForm";
@@ -63,7 +63,7 @@ const SignUp = () => {
   };
 
   return (
-    <SignUpContainer>
+    <ProfileContainer>
       <Header title={'아무말 대잔치'}/>
       <h2>회원가입</h2>
       <div className="signup-container">
@@ -75,7 +75,7 @@ const SignUp = () => {
           isActive={isFormValid}
         />
       </div>
-    </SignUpContainer>
+    </ProfileContainer>
   );
 };
 
