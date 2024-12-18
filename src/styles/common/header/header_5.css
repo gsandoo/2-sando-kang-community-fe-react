@@ -1,6 +1,5 @@
 header {
     height: 104px;
-    padding-bottom: 20px;
     border-bottom: 1px solid #000000;
     text-align: center;
     background-color: #f4f5f7;
@@ -17,7 +16,6 @@ header {
 }
 
 .title {
-    margin-left: 10%;
     width: 100%;
     text-align: center;
     font-size: 32px;
@@ -26,10 +24,10 @@ header {
 }
 
 .avatar {
-    width: 40px;
+    width: 35px;
     height: 30px;
     background-color: #ccc;
-    border-radius: 50%;
+    border-radius: 70%;
     margin-right: 10px;
 }
 

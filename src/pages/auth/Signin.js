@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SignUpContainer from "../../components/container/Container_4";
+import SignUpContainer from "../../components/container/profile-container";
 import Header from "../../components/header/Header4";
 import ProfileImageUploader from "../../components/profile/ProfileImageUploader";
 import SignUpForm from "../../components/signup/SignUpForm";

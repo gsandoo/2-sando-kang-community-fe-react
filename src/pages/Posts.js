@@ -1,6 +1,6 @@
 import React from "react";
 import PostContainer from "../components/container/Container";
-import Header1 from "../components/header/Header1";
+import ProfileHeader from "../components/header/profile-header";
 import PostWriteButton from "../components/posts/PostWriteButton";
 import PostsList from "../components/posts/PostsList";
 import "../styles/posts/posts.css";
@@ -8,7 +8,7 @@ import "../styles/posts/posts.css";
 const Posts = () => {
   return (
     <PostContainer>
-      <Header1 title="아무 말 대잔치" />
+      <ProfileHeader title="아무 말 대잔치" />
       <section className="intro">
         <div className="intro-word">
           <p>

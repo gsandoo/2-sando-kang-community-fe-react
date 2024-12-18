@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { handleLocation } from '../../utils/handleLocation';
+import "../../styles/common/header/make-post-header.css";
 
 const MakePostHeader = ({ title }) => {
   const [profile, setProfile] = useState(null);

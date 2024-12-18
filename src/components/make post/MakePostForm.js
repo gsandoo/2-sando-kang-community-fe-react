@@ -1,7 +1,7 @@
 import React from 'react';
 import MakePostButton from './MakePostButton';
 import useMakePostForm from '../../hooks/useMakePostForm';
-
+import '../../styles/make post/make-post-form.css'
 const MakePostForm = () => {
   const { formData, handleChange, validateForm, handleSubmit } = useMakePostForm();
 

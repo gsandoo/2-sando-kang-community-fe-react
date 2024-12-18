@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { pwValidCheck, confirmPwValidCheck } from '../../utils/validation';  // 유효성 검사 함수
+import { pwValidCheck} from '../../utils/validation';  // 유효성 검사 함수
 import { getLocalStorage, saveLocalStorage } from '../../utils/session';
 import { handleLocation } from '../../utils/handleLocation';
 

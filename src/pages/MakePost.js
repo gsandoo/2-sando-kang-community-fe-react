@@ -1,17 +1,14 @@
 import React from 'react';
-import '../styles/make post/make post.css';
-import MakePostContainer from '../components/make post/MakePostContainer';
-import MakePostHeader from '../components/header/Header5';
+import ProfileContainer from '../components/container/ProfileContainer';
+import MakePostHeader from '../components/header/make-post-header';
 import MakePostForm from '../components/make post/MakePostForm';
-
-import '../styles/make post/make post.css';
 
 const MakePost = () => {
   return (
-    <MakePostContainer>
+    <ProfileContainer>
       <MakePostHeader title="아무 말 대잔치" />
       <MakePostForm />
-    </MakePostContainer>
+    </ProfileContainer>
   );
 };
 

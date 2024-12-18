@@ -7,7 +7,7 @@ header {
 }
 
 #header-container {
-    width: 50%;
+    width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +35,7 @@ header {
     cursor: pointer;
 }
 
-.title {
+.title h1{
     display: flex;
     justify-content: center;
     align-items: center;
