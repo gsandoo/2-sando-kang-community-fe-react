@@ -6,21 +6,19 @@ const ProfileUpdateButton = ({ nickname, setError, error, file }) => {
   const [toastVisible, setToastVisible] = useState(false);
 
   const handleUpdate = async () => {
-    console.log('닉네임:', nickname);
-    console.log('파일:', file);
-  
-    if (!file) {
-      console.error('파일이 전달되지 않았습니다.');
-      setError('파일을 선택해 주세요.');
-      return;
-    }
-  
+    
     const formData = new FormData();
     const userId = getLocalStorage('userId');
     try {
+
+      console.log(`user id : ${userId}`);
+      console.log(`nickname : ${nickname}`);
+      console.log(`file : ${file}`);
+
       formData.append('user_id', userId);
       formData.append('nickname', nickname);
-      formData.append('profile', file);
+      if(file)formData.append('profile', file);
+      
   
       const response = await fetch('/api/auth/nickname', {
         method: 'PATCH',
@@ -49,8 +47,7 @@ const ProfileUpdateButton = ({ nickname, setError, error, file }) => {
       }
     } catch (error) {
       console.error('Error:', error);
-      alert(`JPG, PNG, GIF만 허용됩니다.`);
-      window.location.reload();
+      handleLocation('/posts');
     }
   };
   

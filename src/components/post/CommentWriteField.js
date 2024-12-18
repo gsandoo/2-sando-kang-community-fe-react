@@ -60,7 +60,8 @@ const CommentWriteField = ({ onAddComment, initialComment, onEditComment }) => {
           <textarea
             value={commentContent}
             onChange={handleCommentChange}
-            placeholder="댓글을 남겨주세요!"
+            placeholder="댓글을 달아주세요 (최대 100자)"
+            maxLength="100"
           />
           <button className="comment-submit" onClick={handleSubmit}>
             {initialComment ? "댓글 수정" : "댓글 등록"}

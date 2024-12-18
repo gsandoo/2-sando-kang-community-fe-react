@@ -8,6 +8,9 @@ const PostField = ({ post }) => {
   const postDetails = JSON.parse(localStorage.getItem('postDetails'));
   const profile = postDetails.profile;
 
+  console.log(`post : ${JSON.stringify(post, null, 2)}`);
+  console.log(`user id: ${getLocalStorage('userId')}`);
+
   const handleModify = () => {
     saveLocalStorage("editTitle", post.title);
     saveLocalStorage("editContent", post.content);
@@ -90,20 +93,26 @@ const PostField = ({ post }) => {
           </div>
           <div className="author-info">
             <span className="author-name">{post.author || "알 수 없음"}</span>
-            <span className="date">{post.updatePostDate || "알 수 없음"}</span>
+            <span className="date">{new Date(post.updatePostDate).toISOString().slice(0, 10)}</span>
           </div>
 
           <div className="post-actions">
-            <div className="edit" id="btnbtn" onClick={handleModify}>수정</div>
-            <div className="delete" id="btnbtn"  onClick={handleDelete}>삭제</div>
+            {post.user_id == getLocalStorage('userId') && (
+              <>
+                <div className="edit" id="btnbtn" onClick={handleModify}>수정</div>
+                <div className="delete" id="btnbtn" onClick={handleDelete}>삭제</div>
+              </>
+            )}
           </div>
         </div>
 
         {/* Post Content */}
         <div className="post-content">
-          <div className="post-img">
-            <img src={post.image} alt="board" />
-          </div>
+          {post.image && (
+            <div className="post-img">
+              <img src={post.image} alt="board" />
+            </div>
+          )}
           <div className="post-article">
             <p>{post.content}</p>
           </div>

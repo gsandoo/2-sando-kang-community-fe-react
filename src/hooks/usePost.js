@@ -53,7 +53,6 @@ const usePost = () => {
           user_id: userId,
           post_id: postId,
           comment: commentContent,
-          date: getCurrentDate(),
         }),
       });
       const data = await response.json();

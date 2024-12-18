@@ -23,7 +23,8 @@ const MakePostForm = () => {
       <textarea
         id="content"
         name="content"
-        placeholder="내용을 입력하세요"
+        placeholder="내용을 입력하세요 (최대 100자)"
+        maxLength="100"
         value={formData.content}
         onChange={handleChange}
         required
