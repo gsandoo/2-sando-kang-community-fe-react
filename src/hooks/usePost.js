@@ -71,9 +71,6 @@ const usePost = () => {
     const postId = JSON.parse(localStorage.getItem("postDetails")).id;
     const userId = localStorage.getItem("userId");
 
-    console.log(`userId: ${userId}`);
-    console.log(`postId: ${postId}`);
-    console.log(`commentId: ${commentId}`);
     try {
       const response = await fetch("/api/comment", {
         method: "DELETE",

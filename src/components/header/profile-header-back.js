@@ -60,7 +60,7 @@ const ProfileHeaderBack = ({ title }) => {
             {'<'}
           </button>
         </div>
-        <h1 className="title">{title}</h1>
+        <h1 className="title" onClick={() => handleLocation('/posts')}>{title}</h1>
         <div className="avatar" onClick={toggleDropdown}>
           <img src={profile} alt="Profile" />
           {dropdownVisible && (

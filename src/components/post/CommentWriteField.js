@@ -4,7 +4,6 @@ import { getLocalStorage } from "../../utils/session";
 const CommentWriteField = ({ onAddComment, initialComment, onEditComment }) => {
   const [commentContent, setCommentContent] = useState("");
 
-  // 댓글 수정 시 초기 댓글 내용이 textarea에 표시되도록 처리
   useEffect(() => {
     if (initialComment) {
       setCommentContent(initialComment.content); 
@@ -27,6 +26,9 @@ const CommentWriteField = ({ onAddComment, initialComment, onEditComment }) => {
 
     if (initialComment) {
       const userId = getLocalStorage('userId');
+      console.log(`userid: ${userId}`);
+      console.log(`initialComment: ${initialComment.id}`);
+      console.log(`content: ${commentContent}`);
       const response = await fetch("/api/comment", {
         method: "PUT",
         headers: {

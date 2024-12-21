@@ -35,6 +35,10 @@
     text-align: center;
 }
 
+.title:hover {
+    cursor: pointer;
+}
+
 .avatar {
     width: 35px;
     height: 30px;

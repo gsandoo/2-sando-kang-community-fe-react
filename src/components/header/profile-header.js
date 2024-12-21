@@ -51,7 +51,7 @@ const ProfileHeader = ({ title }) => {
   return (
     <header className="profile-header">
       <div className="profile-head">
-        <h1 className="title">{title}</h1>
+        <h1 className="title" onClick={() => handleLocation('/posts')}>{title}</h1>
         <div className="avatar" onClick={toggleDropdown}>
           <img src={profile} alt="Profile" />
           {dropdownVisible && (
