@@ -1,6 +1,8 @@
 .intro {
-    width: 35%;
-    margin: 20px 0;
+    width: 640px;
+    height: 244px;
+ 
+    margin: 20px 0 10px 0;
 }
 
 .intro-word{
@@ -19,8 +21,6 @@
 }
 
 .write-post-button{
-    width: 147px;
-    height: 87px;
     float: right;
     text-align: right;
 }
@@ -29,7 +29,6 @@
     background-color: #aca0eb;
     color: #fff;
     border: none;
-    margin-right: 20px;
     padding: 10px 20px;
     margin-top: 10px;
     cursor: pointer;
