@@ -1,15 +1,15 @@
-import React from "react";
-import { getLocalStorage, saveLocalStorage } from '../../utils/session';
-import { handleLocation } from '../../utils/handleLocation';
+import React, { useState } from "react";
+import { getLocalStorage, saveLocalStorage } from "../../utils/session";
+import { handleLocation } from "../../utils/handleLocation";
 
-import '../../styles/post/post.css';
+import "../../styles/post/post.css";
 
 const PostField = ({ post }) => {
-  const postDetails = JSON.parse(localStorage.getItem('postDetails'));
+  const postDetails = JSON.parse(localStorage.getItem("postDetails"));
   const profile = postDetails.profile;
 
-  console.log(`post : ${JSON.stringify(post, null, 2)}`);
-  console.log(`user id: ${getLocalStorage('userId')}`);
+  const [likesCount, setLikesCount] = useState(post.likesCnt || 0);
+  const [userLiked, setUserLiked] = useState(false); // 좋아요 상태 관리
 
   const handleModify = () => {
     saveLocalStorage("editTitle", post.title);
@@ -17,17 +17,17 @@ const PostField = ({ post }) => {
     handleLocation("/post/edit");
   };
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     const confirmDelete = window.confirm("게시글을 삭제하시겠습니까?");
     if (confirmDelete) {
-      const postId = post.post_id; 
-      const userId = getLocalStorage('userId');
-      
+      const postId = post.post_id;
+      const userId = getLocalStorage("userId");
+
       try {
         const response = await fetch(`/api/post`, {
-          method: 'DELETE',
+          method: "DELETE",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             user_id: userId,
@@ -39,45 +39,45 @@ const PostField = ({ post }) => {
           alert(`${data.data}`);
           handleLocation("/posts");
         } else {
-          console.error('게시글 삭제 실패:', data.data);
+          console.error("게시글 삭제 실패:", data.data);
           alert(`${data.data}`);
         }
       } catch (error) {
-        console.error('Error:', error);
-        alert('서버 오류가 발생했습니다.');
+        console.error("Error:", error);
+        alert("서버 오류가 발생했습니다.");
       }
     }
   };
 
   const handleLike = async () => {
     const postId = post.post_id;
-    const userId = getLocalStorage('userId');
-    
-    console.log(`postId: ${postId}`);
-    console.log(`userId:${userId}`);
+    const userId = getLocalStorage("userId");
 
     try {
       const response = await fetch(`/api/post`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           user_id: userId,
           post_id: postId,
         }),
       });
+
       const data = await response.json();
       if (data.success) {
-        alert(`${data.data}`);
-        window.location.reload();
+        if (userLiked) {
+          setLikesCount((prev) => prev - 1); // 좋아요 감소
+        } else {
+          setLikesCount((prev) => prev + 1); // 좋아요 증가
+        }
+        setUserLiked(!userLiked); // 상태 반전
       } else {
-        console.error('좋아요 추가 실패:', data.message);
-        alert(`${data.data}`);
+        console.error("좋아요 처리 실패:", data.message);
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('서버 오류가 발생했습니다.');
+      console.error("Error:", error);
     }
   };
 
@@ -86,7 +86,7 @@ const PostField = ({ post }) => {
       <article>
         {/* Title */}
         <h2>{post.title}</h2>
-        
+
         <div className="author">
           <div className="avatar">
             <img src={profile || "/assets/images/default-avatar.png"} alt="avatar" />
@@ -97,10 +97,14 @@ const PostField = ({ post }) => {
           </div>
 
           <div className="post-actions">
-            {post.user_id == getLocalStorage('userId') && (
+            {post.user_id == getLocalStorage("userId") && (
               <>
-                <div className="edit" id="btnbtn" onClick={handleModify}>수정</div>
-                <div className="delete" id="btnbtn" onClick={handleDelete}>삭제</div>
+                <div className="edit" id="btnbtn" onClick={handleModify}>
+                  수정
+                </div>
+                <div className="delete" id="btnbtn" onClick={handleDelete}>
+                  삭제
+                </div>
               </>
             )}
           </div>
@@ -120,9 +124,20 @@ const PostField = ({ post }) => {
 
         {/* Post Stats */}
         <div className="post-stats">
-          <div className="stats" id="likesCount" onClick={handleLike}>{post.likesCnt || 0} 좋아요</div>
-          <div className="stats" id="viewsCount">{post.viewsCnt || 0} 조회수</div>
-          <div className="stats" id="commentsCount">{post.commentsCnt || 0} 댓글</div>
+          <div
+            className="stats"
+            id="likesCount"
+            onClick={handleLike}
+            style={{ cursor: "pointer" }}
+          >
+            {likesCount} {"❤️"}
+          </div>
+          <div className="stats" id="viewsCount">
+            {post.viewsCnt || 0} 조회수
+          </div>
+          <div className="stats" id="commentsCount">
+            {post.commentsCnt || 0} 댓글
+          </div>
         </div>
       </article>
     </div>
