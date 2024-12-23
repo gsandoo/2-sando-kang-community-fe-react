@@ -1,53 +1,53 @@
-name: Deploy React to S3 and CloudFront
+# name: Deploy React to S3 and CloudFront
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-    # 1. 코드 체크아웃
-    - name: Checkout code
-      uses: actions/checkout@v3
+#     steps:
+#     # 1. 코드 체크아웃
+#     - name: Checkout code
+#       uses: actions/checkout@v3
 
-    # 2. Node.js 설정
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '22' 
+#     # 2. Node.js 설정
+#     - name: Set up Node.js
+#       uses: actions/setup-node@v3
+#       with:
+#         node-version: '22' 
 
-    # 3. 의존성 설치
-    - name: Install dependencies
-      run: npm install
+#     # 3. 의존성 설치
+#     - name: Install dependencies
+#       run: npm install
 
-    # 4. 빌드 실행
-    - name: Build React app
-      run: npm run build
+#     # 4. 빌드 실행
+#     - name: Build React app
+#       run: npm run build
 
-    # 5. AWS 자격 증명 설정
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+#     # 5. AWS 자격 증명 설정
+#     - name: Configure AWS credentials
+#       uses: aws-actions/configure-aws-credentials@v1
+#       with:
+#         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#         aws-region: ${{ secrets.AWS_REGION }}
 
-    # 6. S3에 정적 파일 업로드
-    - name: Deploy to S3
-      run: |
-        aws s3 sync ./build/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
+#     # 6. S3에 정적 파일 업로드
+#     - name: Deploy to S3
+#       run: |
+#         aws s3 sync ./build/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
 
-    # 7. 디버깅: S3 업로드 확인
-    - name: Verify S3 sync
-      run: aws s3 ls s3://${{ secrets.S3_BUCKET_NAME }}
+#     # 7. 디버깅: S3 업로드 확인
+#     - name: Verify S3 sync
+#       run: aws s3 ls s3://${{ secrets.S3_BUCKET_NAME }}
 
-    # 8. CloudFront 캐시 무효화
-    - name: Invalidate CloudFront cache
-      run: |
-        aws cloudfront create-invalidation \
-          --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-          --paths "/*"
+#     # 8. CloudFront 캐시 무효화
+#     - name: Invalidate CloudFront cache
+#       run: |
+#         aws cloudfront create-invalidation \
+#           --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+#           --paths "/*"
