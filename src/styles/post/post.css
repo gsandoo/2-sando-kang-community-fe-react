@@ -4,9 +4,23 @@
     justify-content: center;
 }
 
+.comment-write-field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.comment-field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
 article {
-    width: 30%;
-    padding: 0 20% 0 20%;
+    width: 544px;
     margin-top: 20px;    
 }
 
@@ -118,18 +132,9 @@ article h2 {
     margin-top: 20px;
 }
 
-.comment-field {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
 .comment-form {
     width: 544px;
-    padding: 0 20% 0 20%;
-    margin-top: 20px;
-    margin-right: 40px;   
+    margin-top: 20px; 
     display: flex;
     justify-content: center;
     align-items: center;
