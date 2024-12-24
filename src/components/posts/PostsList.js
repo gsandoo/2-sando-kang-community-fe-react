@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
+import { saveLocalStorage } from "../../utils/session";
+import { handleLocation } from "../../utils/handleLocation";
 import { useInView } from "react-intersection-observer";
+import { Rings } from "react-loader-spinner"; 
 
 const PostsList = () => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const pageRef = useRef(1); // 페이지를 참조로 관리
-  const { ref, inView } = useInView({ threshold: 0.1 }); // 감지 임계값 설정 (0.1: 10% 보이면 감지)
+  const pageRef = useRef(1);
+  const { ref, inView } = useInView({ threshold: 0.1 });
 
   const fetchPosts = async () => {
-    if (isLoading || !hasMore) return; // 로딩 중이거나 더 가져올 데이터가 없으면 차단
+    if (isLoading || !hasMore) return;
 
     setIsLoading(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 2500));
 
     try {
       const response = await fetch(`/api/post?page=${pageRef.current}`);
@@ -32,13 +35,13 @@ const PostsList = () => {
           ),
         ]);
 
-        pageRef.current += 1; // 페이지 증가
-        setHasMore(morePostsAvailable); // 더 가져올 데이터 여부 설정
+        pageRef.current += 1;
+        setHasMore(morePostsAvailable);
       }
     } catch (error) {
       console.error("Error fetching posts:", error);
     } finally {
-      setIsLoading(false); // 로딩 상태 해제
+      setIsLoading(false);
     }
   };
 
@@ -50,7 +53,6 @@ const PostsList = () => {
   }, [inView, hasMore, isLoading]);
 
   useEffect(() => {
-    // 초기 데이터 로드
     fetchPosts();
   }, []);
 
@@ -79,14 +81,24 @@ const PostsList = () => {
           </div>
         </div>
       ))}
-      {isLoading && <div id="loading">Loading...</div>}
-      {!hasMore && <div id="no-more-posts">더 이상 게시글이 없습니다.</div>}
-      <div ref={ref} style={{ height: "1px", marginBottom: "20px" }} /> {/* 감지 요소 */}
+      {isLoading && (
+        <div className="spinner-container">
+          <Rings
+            height="80"
+            width="80"
+            color="#6fd94f"
+            ariaLabel="rings-loading"
+          />
+        </div>
+      )}
+      {!hasMore && <div id="no-more-posts">더 이상 게시글이 없습니다!</div>}
+      <div ref={ref} style={{ height: "1px", marginBottom: "20px" }} />
     </div>
   );
 
   function handlePostClick(post) {
-    console.log("Post clicked:", post);
+    saveLocalStorage("postDetails", JSON.stringify(post));
+    handleLocation("/post");
   }
 
   function formatNumber(num) {
