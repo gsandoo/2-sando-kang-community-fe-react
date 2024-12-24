@@ -66,7 +66,7 @@ const PostsList = () => {
         >
           <div className="post-header">
             <h2>{post.title}</h2>
-            <span className="date">{post.date}</span>
+            <span className="date">{new Date(post.date).toISOString().slice(0, 10)}</span>
           </div>
           <div className="post-info">
             <span>좋아요 {formatNumber(post.likes)}</span>
