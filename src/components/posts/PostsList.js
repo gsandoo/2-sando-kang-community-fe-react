@@ -1,65 +1,58 @@
-import React, { useState, useEffect } from "react";
-import { saveLocalStorage } from "../../utils/session";
-import { handleLocation } from "../../utils/handleLocation";
+import React, { useState, useEffect, useRef } from "react";
+import { useInView } from "react-intersection-observer";
 
 const PostsList = () => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const pageRef = useRef(1); // 페이지를 참조로 관리
+  const { ref, inView } = useInView({ threshold: 0.1 }); // 감지 임계값 설정 (0.1: 10% 보이면 감지)
 
   const fetchPosts = async () => {
-    if (isLoading || !hasMore) return;
+    if (isLoading || !hasMore) return; // 로딩 중이거나 더 가져올 데이터가 없으면 차단
 
     setIsLoading(true);
 
-    try {
-      const response = await fetch(`/api/post?page=${page}`);
-      const data = await response.json();
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
+    try {
+      const response = await fetch(`/api/post?page=${pageRef.current}`);
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
+      }
+
+      const data = await response.json();
       if (data.success) {
         const { postData, hasMore: morePostsAvailable } = data.data;
 
-        console.log("Fetched Posts:", postData);
+        setPosts((prevPosts) => [
+          ...prevPosts,
+          ...postData.filter(
+            (newPost) => !prevPosts.some((prevPost) => prevPost.id === newPost.id)
+          ),
+        ]);
 
-        if (postData.length > 0) {
-          setPosts((prevPosts) => {
-            const newPosts = postData.filter(
-              (newPost) => !prevPosts.some((prevPost) => prevPost.id === newPost.id)
-            );
-            return [...prevPosts, ...newPosts];
-          });
-          setPage((prevPage) => prevPage + 1); 
-        }
-
-        setHasMore(morePostsAvailable);
+        pageRef.current += 1; // 페이지 증가
+        setHasMore(morePostsAvailable); // 더 가져올 데이터 여부 설정
       }
     } catch (error) {
       console.error("Error fetching posts:", error);
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // 로딩 상태 해제
     }
   };
-  
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.innerHeight + window.scrollY;
-      const totalHeight = document.body.offsetHeight;
-    
-      if (hasMore && !isLoading && scrollPosition >= totalHeight - 200) {
-        console.log("Fetching more posts...");
-        fetchPosts();
-      }
-    };
+    if (inView && hasMore && !isLoading) {
+      console.log("Fetching more posts...");
+      fetchPosts();
+    }
+  }, [inView, hasMore, isLoading]);
+
+  useEffect(() => {
+    // 초기 데이터 로드
     fetchPosts();
-    window.addEventListener("scroll", handleScroll);
-  
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [hasMore, isLoading]); 
-  
+  }, []);
 
   return (
     <div>
@@ -88,20 +81,20 @@ const PostsList = () => {
       ))}
       {isLoading && <div id="loading">Loading...</div>}
       {!hasMore && <div id="no-more-posts">더 이상 게시글이 없습니다.</div>}
+      <div ref={ref} style={{ height: "1px", marginBottom: "20px" }} /> {/* 감지 요소 */}
     </div>
   );
-};
 
-const handlePostClick = (post) => {
-  saveLocalStorage("postDetails", JSON.stringify(post));
-  handleLocation("/post");
-};
+  function handlePostClick(post) {
+    console.log("Post clicked:", post);
+  }
 
-const formatNumber = (num) => {
-  if (num >= 100000) return Math.floor(num / 1000) + "k";
-  if (num >= 10000) return (num / 1000).toFixed(0) + "k";
-  if (num >= 1000) return (num / 1000).toFixed(1) + "k";
-  return num.toString();
+  function formatNumber(num) {
+    if (num >= 100000) return Math.floor(num / 1000) + "k";
+    if (num >= 10000) return (num / 1000).toFixed(0) + "k";
+    if (num >= 1000) return (num / 1000).toFixed(1) + "k";
+    return num.toString();
+  }
 };
 
 export default PostsList;

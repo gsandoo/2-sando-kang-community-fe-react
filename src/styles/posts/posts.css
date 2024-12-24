@@ -114,3 +114,13 @@
     width: 34px;
     height: 34px;
 }
+
+.spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; /* 스피너 높이 */
+    margin: 20px auto; /* 아래쪽 간격 */
+    position: relative; /* 위치 설정 */
+  }
+  
