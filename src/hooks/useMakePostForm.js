@@ -26,6 +26,7 @@ const useMakePostForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = getLocalStorage('userId');
+    const token = getLocalStorage('jwtToken');
 
     const postFormData = new FormData();
     postFormData.append('user_id', userId);
@@ -38,6 +39,9 @@ const useMakePostForm = () => {
     try {
       const response = await fetch('/api/post', {
         method: 'POST',
+        headers: {
+        Authorization: `Bearer ${token}`,
+        },
         body: postFormData,
       });
       const data = await response.json();

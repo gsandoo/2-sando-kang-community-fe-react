@@ -23,9 +23,8 @@ const Profile = () => {
     setModalVisible(true); 
   };
 
-  const handleModalConfirm = async () => {
+  const handleWithdrawConfirm = async () => {
     const userId = getLocalStorage('userId'); 
-  
     if (userId) {
       try {
         const response = await fetch('/api/auth/withdraw', {
@@ -90,7 +89,7 @@ const Profile = () => {
       <WithdrawButton onWithdraw={handleWithdraw} />
       <WithdrawModal
         visible={isModalVisible}
-        onConfirm={handleModalConfirm}
+        onConfirm={handleWithdrawConfirm}
         onCancel={handleModalCancel}
       />
       <ToastMessage />

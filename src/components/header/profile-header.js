@@ -16,16 +16,17 @@ const ProfileHeader = ({ title }) => {
     setDropdownVisible((prev) => !prev);
   };
 
-  const logout = (event) => {
+  const handleLogoutSubmit = (event) => {
     event.preventDefault();
 
     const userId = getLocalStorage('userId');
+    const token = getLocalStorage('jwtToken');
 
     if (userId) {
       fetch('/api/auth/logout', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ user_id: userId }),
       })
@@ -34,6 +35,7 @@ const ProfileHeader = ({ title }) => {
           if (data.success) {
             alert('로그아웃이 완료되었습니다.');
             localStorage.removeItem('userId');
+            localStorage.removeItem('jwtToken');
             handleLocation('/'); 
           } else {
             throw new Error(data.message || '로그아웃 실패');
@@ -58,7 +60,7 @@ const ProfileHeader = ({ title }) => {
             <div className="dropdown-menu">
               <Link to="/profile">회원정보 수정</Link>
               <Link to="/password">비밀번호 수정</Link>
-              <a href="#" onClick={logout}>로그아웃</a>
+              <a href="#" onClick={handleLogoutSubmit}>로그아웃</a>
             </div>
           )}
         </div>
