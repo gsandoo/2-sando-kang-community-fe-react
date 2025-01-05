@@ -25,12 +25,14 @@ const Profile = () => {
 
   const handleWithdrawConfirm = async () => {
     const userId = getLocalStorage('userId'); 
+    const token = getLocalStorage('jwtToken');
     if (userId) {
       try {
         const response = await fetch('/api/auth/withdraw', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ user_id: userId }), 
         });
@@ -42,7 +44,7 @@ const Profile = () => {
           setModalVisible(false); // 모달 닫기 
           handleLocation('/');
         } else {
-          alert(`회원 탈퇴 실패: ${data.message}`);
+          alert(`회원 탈퇴 실패: ${data.message.code}`);
         }
       } catch (error) {
         console.error('Error:', error);

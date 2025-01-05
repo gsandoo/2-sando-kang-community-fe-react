@@ -22,12 +22,13 @@ const PostField = ({ post }) => {
     if (confirmDelete) {
       const postId = post.post_id;
       const userId = getLocalStorage("userId");
-
+      const token = getLocalStorage('jwtToken');
       try {
         const response = await fetch(`/api/post`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             user_id: userId,
@@ -52,12 +53,13 @@ const PostField = ({ post }) => {
   const handleLike = async () => {
     const postId = post.post_id;
     const userId = getLocalStorage("userId");
-
+    const token = getLocalStorage('jwtToken');
     try {
       const response = await fetch(`/api/post`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           user_id: userId,

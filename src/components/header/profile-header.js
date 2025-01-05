@@ -9,8 +9,6 @@ const ProfileHeader = ({ title }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const profile = getLocalStorage('profile');
-
-  console.log(`profile: ${profile}`);
   
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);

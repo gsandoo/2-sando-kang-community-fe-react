@@ -26,13 +26,13 @@ const CommentWriteField = ({ onAddComment, initialComment, onEditComment }) => {
 
     if (initialComment) {
       const userId = getLocalStorage('userId');
-      console.log(`userid: ${userId}`);
-      console.log(`initialComment: ${initialComment.id}`);
-      console.log(`content: ${commentContent}`);
+      const token = getLocalStorage('jwtToken');
+     
       const response = await fetch("/api/comment", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
           user_id: userId,

@@ -9,19 +9,19 @@ const ProfileUpdateButton = ({ nickname, setError, error, file }) => {
     
     const formData = new FormData();
     const userId = getLocalStorage('userId');
+    const token = getLocalStorage('jwtToken');
     try {
-
-      console.log(`user id : ${userId}`);
-      console.log(`nickname : ${nickname}`);
-      console.log(`file : ${file}`);
 
       formData.append('user_id', userId);
       formData.append('nickname', nickname);
-      if(file)formData.append('profile', file);
       
-  
+      if(file)formData.append('profile', file);
+    
       const response = await fetch('/api/auth/nickname', {
         method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       });
       const data = await response.json();
@@ -32,22 +32,20 @@ const ProfileUpdateButton = ({ nickname, setError, error, file }) => {
         setTimeout(() => setToastVisible(false), 2000);
         saveLocalStorage('nickname', nickname);
   
-        // FileReader로 파일을 Base64로 변환 후 저장
+
         const reader = new FileReader();
         reader.onload = (e) => {
           const base64Data = e.target.result;
-          console.log('Base64로 변환된 데이터:', base64Data);
-          saveLocalStorage('profile', base64Data); // Base64 데이터 저장
+          saveLocalStorage('profile', base64Data); 
         };
-        reader.readAsDataURL(file); // Base64 변환 실행
+        reader.readAsDataURL(file); 
         handleLocation('/Posts');
       } else {
-        alert(`프로필 수정 중 에러가 발생하였습니다`);
-        setError(data.message || '닉네임 수정 실패');
+        alert(`${data.message.code}`);
+        setError(data.message.code || '닉네임 수정 실패');
       }
     } catch (error) {
-      console.error('Error:', error);
-      handleLocation('/posts');
+      alert(error);
     }
   };
   

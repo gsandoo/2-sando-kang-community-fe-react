@@ -48,6 +48,7 @@ const PasswordForm = () => {
 
     if (isFormValid) {
       const userId = getLocalStorage('userId');
+      const token = getLocalStorage('jwtToken');
       const newPassword = password.trim();
 
       if (userId) {
@@ -56,6 +57,7 @@ const PasswordForm = () => {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({ user_id: userId, password: newPassword }),
           });
