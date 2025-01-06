@@ -22,7 +22,7 @@ const PostField = ({ post }) => {
     if (confirmDelete) {
       const postId = post.post_id;
       const userId = getLocalStorage("userId");
-      const token = getLocalStorage('jwtToken');
+      const token = getLocalStorage("jwtToken");
       try {
         const response = await fetch(`/api/post`, {
           method: "DELETE",
@@ -53,7 +53,7 @@ const PostField = ({ post }) => {
   const handleLike = async () => {
     const postId = post.post_id;
     const userId = getLocalStorage("userId");
-    const token = getLocalStorage('jwtToken');
+    const token = getLocalStorage("jwtToken");
     try {
       const response = await fetch(`/api/post`, {
         method: "PATCH",
@@ -82,6 +82,22 @@ const PostField = ({ post }) => {
       console.error("Error:", error);
     }
   };
+
+  // Split content into chunks of 25 characters
+  const splitContent = (content, chunkSize) => {
+    const chunks = [];
+    for (let i = 0; i < content.length; i += chunkSize) {
+      chunks.push(content.slice(i, i + chunkSize));
+    }
+    return chunks;
+  };
+
+  const formattedContent = splitContent(post.content, 25).map((line, index) => (
+    <span key={index}>
+      {line}
+      <br />
+    </span>
+  ));
 
   return (
     <div className="post-field">
@@ -120,7 +136,7 @@ const PostField = ({ post }) => {
             </div>
           )}
           <div className="post-article">
-            <p>{post.content}</p>
+            <p>{formattedContent}</p>
           </div>
         </div>
 
