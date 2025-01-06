@@ -51,7 +51,7 @@ const SignUp = () => {
 
       const data = await response.json();
       if (data.success) {
-        alert('회원가입이 성공적으로 이루어졌습니다.');
+        alert(`${data.data}`);
         handleLocation('/');
       } else {
         alert(`회원가입 실패: ${data.message.code}`);

@@ -49,7 +49,7 @@ const Login = () => {
         alert("로그인이 정상적으로 이루어졌습니다.");
         handleLocation("/posts");
       } else {
-        alert(`로그인이 되지 않았습니다: ${data.message.code}`);
+        alert(`${data.data}`);
       }
     } catch (error) {
       console.error("Error:", error);
