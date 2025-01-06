@@ -27,18 +27,22 @@ const ProfileUpdateButton = ({ nickname, setError, error, file }) => {
       const data = await response.json();
   
       if (data.success) {
+        console.log(data.data)
         alert(`프로필 수정이 완료되었습니다`);
         setToastVisible(true);
         setTimeout(() => setToastVisible(false), 2000);
         saveLocalStorage('nickname', nickname);
   
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const base64Data = e.target.result;
-          saveLocalStorage('profile', base64Data); 
-        };
-        reader.readAsDataURL(file); 
+        if(file){
+        
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const base64Data = e.target.result;
+            console.log(base64Data)
+            saveLocalStorage('profile', base64Data); 
+          }
+          reader.readAsDataURL(file)
+        }
         handleLocation('/Posts');
       } else {
         alert(`${data.message.code}`);
