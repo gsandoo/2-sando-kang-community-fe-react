@@ -2,13 +2,13 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: auto; /* 높이를 auto로 설정하여 내용에 따라 높이가 조절되도록 함 */
+    height: auto; 
     background-image: url('/public/images/squid_game.jpeg');
     background-size: cover;
     background-position: center;
-    background-repeat: repeat; /* 배경 이미지가 반복되도록 설정 */
+    background-repeat: repeat; 
     position: relative;
-    overflow-y: auto; /* 세로 스크롤이 가능하도록 설정 */
+    overflow-y: auto;
 }
 
 body::before {
@@ -23,13 +23,13 @@ body::before {
 
 .profile-container {
     width: 100%;
-    height: auto; /* 높이를 auto로 설정하여 내용에 따라 높이가 조절되도록 함 */
+    height: auto; 
     margin: 0 auto;
     background-image: url('/public/images/squid_game.jpeg');
     background: rgba(0, 0, 0, 0.1);
     background-size: cover;
     background-position: center;
-    background-repeat: repeat; /* 배경 이미지가 반복되도록 설정 */
+    background-repeat: repeat; 
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -37,5 +37,5 @@ body::before {
     align-items: center;
     position: relative;
     z-index: 1;
-    overflow: auto; /* 내용이 넘칠 경우 스크롤이 가능하도록 설정 */
+    overflow: auto; 
 }
