@@ -13,7 +13,7 @@ const Header = ({ title }) => {
                 &lt;
             </div>
             <div className="title">
-                <h4>아무 말 대잔치</h4>
+                <h4>{title}</h4>
             </div>
         </div>
     </header>

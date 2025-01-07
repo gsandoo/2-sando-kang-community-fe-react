@@ -8,6 +8,7 @@ import MakePost from './pages/MakePost';
 import EditPost from './pages/EditPost';
 import Profile from './pages/Profile';
 import Password from './pages/auth/Password';
+import Landing from './pages/Landing';
 
 
 
@@ -15,7 +16,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login/>} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/posts" element={<Posts/>} />
         <Route path="/post/make" element={<MakePost/>} />

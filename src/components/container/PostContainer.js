@@ -30,7 +30,7 @@ const PostContainer = () => {
     <>
       {postData ? (
         <div className="post-container">
-          <ProfileHeader title={'아무말 대잔치'} />
+          <ProfileHeader title={'squid world'} />
           <PostField post={postData} />
           <CommentWriteField 
             onAddComment={addComment}

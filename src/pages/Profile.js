@@ -73,7 +73,7 @@ const Profile = () => {
 
   return (
     <ProfileContainer>
-      <ProfileHeader title="아무말 대잔치" />
+      <ProfileHeader title="squid world" />
       <ProfileImage setFile={setFile} />
       <ProfileForm
         nickname={nickname}

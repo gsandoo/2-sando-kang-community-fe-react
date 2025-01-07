@@ -52,9 +52,9 @@ const SignUp = () => {
       const data = await response.json();
       if (data.success) {
         alert(`${data.data}`);
-        handleLocation('/');
+        handleLocation('/login');
       } else {
-        alert(`회원가입 실패: ${data.message.code}`);
+        alert(`${data.data}`);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -64,8 +64,8 @@ const SignUp = () => {
 
   return (
     <ProfileContainer>
-      <Header title={'아무말 대잔치'}/>
-      <h2>회원가입</h2>
+      <Header title={'squid world'}/>
+      <h2 className="signup-title">회원가입</h2>
       <div className="signup-container">
         <ProfileImageUploader onImageChange={handleImageChange} />
         <SignUpForm

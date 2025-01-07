@@ -2,8 +2,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f4f5f7;
-    border-bottom: 1px solid #000000;
+    background-color: transparent;
 }
 
 #header-container {

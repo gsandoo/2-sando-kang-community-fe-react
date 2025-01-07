@@ -15,7 +15,7 @@ const Password = () => {
 
   return (
     <ProfileContainer>
-      <ProfileHeader title="아무말 대잔치" />
+      <ProfileHeader title="squid world" />
       <PasswordForm
         password={password}
         setPassword={setPassword}

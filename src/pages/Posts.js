@@ -4,16 +4,18 @@ import ProfileHeader from "../components/header/profile-header";
 import PostWriteButton from "../components/posts/PostWriteButton";
 import PostsList from "../components/posts/PostsList";
 import "../styles/posts/posts.css";
+import { getLocalStorage } from "../utils/session";
 
 const Posts = () => {
+  const userId = getLocalStorage('userId');
   return (
     <PostsContainer>
-      <ProfileHeader title="아무 말 대잔치" />
+      <ProfileHeader title="squid world" />
       <section className="intro">
         <div className="intro-word">
           <p>
-            안녕하세요,<br />
-            아무 말 대잔치 <b>게시판</b>입니다.
+            {userId}번 참가자,<br />
+            <b>오징어 월드</b>에 온걸 환영해.
           </p>
         </div>
         <PostWriteButton />

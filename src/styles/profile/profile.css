@@ -36,7 +36,6 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .profile-image {

@@ -9,7 +9,7 @@ import '../styles/edit post/edit post.css';
 function EditPost() {
   return (
     <EditPostContainer>
-      <ProfileHeader title="아무 말 대잔치" />
+      <ProfileHeader title="squid world" />
       <EditPostForm />
       <EditPostButton />
     </EditPostContainer>

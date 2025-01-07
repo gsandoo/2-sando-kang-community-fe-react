@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState  } from "react";
 import LoginContainer from "../../components/container/LoginContainer";
 import Header from "../../components/header/Header3";
 import LoginForm from "../../components/login/LoginForm";
@@ -42,7 +42,14 @@ const Login = () => {
 
         saveLocalStorage("userId", data.data.user_id);
         saveLocalStorage("email", data.data.email);
-        saveLocalStorage("profile", data.data.profile);
+        
+        let profileImage = null; 
+        if(data.data.profile == null) {
+          profileImage = ''
+        }else {
+          profileImage = data.data.profile;
+        }
+        saveLocalStorage("profile", profileImage);
         saveLocalStorage("nickname", data.data.nickname);
         saveLocalStorage("jwtToken", data.data.token);
         
@@ -59,8 +66,8 @@ const Login = () => {
 
   return (
     <LoginContainer>
-      <Header title="아무 말 대잔치" />
-      <h2>로그인</h2>
+      <Header title="squid world" />
+      <h2 className="login-title">로그인</h2>
       <div className="login-container">
         <LoginForm
           onInputChange={handleInputChange} 

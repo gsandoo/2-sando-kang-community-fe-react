@@ -6,7 +6,7 @@ import MakePostForm from '../components/make post/MakePostForm';
 const MakePost = () => {
   return (
     <PostsContainer>
-      <ProfileHeaderBack title="아무 말 대잔치" />
+      <ProfileHeaderBack title="squid world" />
       <MakePostForm />
     </PostsContainer>
   );
