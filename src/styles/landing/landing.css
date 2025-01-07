@@ -9,7 +9,6 @@ body, html {
   width: 100%;
   height: 100%;
   font-family: 'GameOfSquids-1GMVL', sans-serif;
-  overflow: hidden;
 }
 
 .landing-container {

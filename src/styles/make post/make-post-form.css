@@ -9,7 +9,8 @@ h2 {
 }
 
 .make-form {
-    width: 35%;
+    margin-top: 100px;
+    width: 30%;
     display: flex;
     flex-direction: column;
 }
@@ -42,7 +43,7 @@ textarea {
 }
 
 #image-make {
-    width:11% ;
+    width:13% ;
 }
 
 .file-name {
@@ -52,7 +53,7 @@ textarea {
 }
 
 .submit-button {
-    background-color: #ACA0EB;
+    background-color: #f08bb2;
     color: #fff;
     font-size: 16px;
     padding: 10px;
@@ -63,5 +64,5 @@ textarea {
 }
 
 .submit-button:hover {
-    background-color: #7F6AEE;
+    background-color: #F44788;
 }

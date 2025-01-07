@@ -36,12 +36,17 @@ const ProfileHeader = ({ title }) => {
             localStorage.removeItem('jwtToken');
             handleLocation('/'); 
           } else {
-            throw new Error(data.message || '로그아웃 실패');
+            if (data.message.status === 40104) {
+              alert(data.message.code);
+              handleLocation('/login');
+            } else {
+              alert(data.message.code);
+            }
           }
         })
         .catch((error) => {
           console.error('Error:', error);
-          alert(`오류: ${error.message}`);
+          alert(`${error.message.code}`);
         });
     } else {
       alert('사용자 ID를 찾을 수 없습니다.');

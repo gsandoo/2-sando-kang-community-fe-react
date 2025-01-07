@@ -27,11 +27,12 @@
 }
 
 .title {
-    width: 100%;
+    width: 50%;
     text-align: center;
     font-size: 32px;
     line-height: 32px;
     text-align: center;
+    color: #F44788;
 }
 .title:hover {
     cursor: pointer;

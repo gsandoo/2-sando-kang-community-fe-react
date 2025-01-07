@@ -40,8 +40,12 @@ const PostField = ({ post }) => {
           alert(`${data.data}`);
           handleLocation("/posts");
         } else {
-          console.error("게시글 삭제 실패:", data.data);
-          alert(`${data.data}`);
+          if (data.message.status === 40104) {
+            alert(data.message.code);
+            handleLocation('/login');
+          } else {
+            alert(data.message.code);
+          }
         }
       } catch (error) {
         console.error("Error:", error);
@@ -66,24 +70,29 @@ const PostField = ({ post }) => {
           post_id: postId,
         }),
       });
-
+  
       const data = await response.json();
       if (data.success) {
         if (userLiked) {
-          setLikesCount((prev) => prev - 1); // 좋아요 감소
+          setLikesCount((prev) => prev - 1);
         } else {
-          setLikesCount((prev) => prev + 1); // 좋아요 증가
+          setLikesCount((prev) => prev + 1); 
         }
-        setUserLiked(!userLiked); // 상태 반전
+        setUserLiked(!userLiked); 
       } else {
-        console.error("좋아요 처리 실패:", data.message);
+        if (data.message.status === 40104) {
+          alert(data.message.code);
+          handleLocation('/login');
+        } else {
+          alert(data.message.code);
+        }
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
+  
 
-  // Split content into chunks of 25 characters
   const splitContent = (content, chunkSize) => {
     const chunks = [];
     for (let i = 0; i < content.length; i += chunkSize) {
@@ -146,9 +155,8 @@ const PostField = ({ post }) => {
             className="stats"
             id="likesCount"
             onClick={handleLike}
-            style={{ cursor: "pointer" }}
           >
-            {likesCount} {"❤️"}
+            {likesCount} <span className="heart">❤️</span>
           </div>
           <div className="stats" id="viewsCount">
             {post.viewsCnt || 0} 조회수

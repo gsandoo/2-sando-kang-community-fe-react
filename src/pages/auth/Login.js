@@ -43,12 +43,7 @@ const Login = () => {
         saveLocalStorage("userId", data.data.user_id);
         saveLocalStorage("email", data.data.email);
         
-        let profileImage = null; 
-        if(data.data.profile == null) {
-          profileImage = ''
-        }else {
-          profileImage = data.data.profile;
-        }
+        const profileImage = data.data.profile ?? 'https://ktb-image-bucket.s3.ap-northeast-2.amazonaws.com/uploads/1736266048565-default.jpg';
         saveLocalStorage("profile", profileImage);
         saveLocalStorage("nickname", data.data.nickname);
         saveLocalStorage("jwtToken", data.data.token);

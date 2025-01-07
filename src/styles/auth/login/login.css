@@ -1,6 +1,5 @@
 .login-container {
-    background-color: transparent;
-    margin-top: 10%;
+    margin-top: 5%;
     padding: 2rem;
     width: 392px;
     height: 221px;
@@ -20,6 +19,7 @@
   }
   
   .login-field{
+    margin-top: 0%;
     width: 100%;
     height: 100%;
     margin-left: 0;
@@ -27,7 +27,6 @@
   
   .input-group-login {
     margin-bottom: 1.2rem;
-    
   }
   
   .input-group-login label {

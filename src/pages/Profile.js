@@ -41,10 +41,15 @@ const Profile = () => {
   
         if (data.success) {
           alert('회원 탈퇴가 완료되었습니다.');
-          setModalVisible(false); // 모달 닫기 
+          setModalVisible(false);
           handleLocation('/');
         } else {
-          alert(`회원 탈퇴 실패: ${data.message.code}`);
+          if (data.message.status === 40104) {
+            alert(data.message.code);
+            handleLocation('/login');
+          } else {
+            alert(data.message.code);
+          }
         }
       } catch (error) {
         console.error('Error:', error);

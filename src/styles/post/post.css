@@ -25,6 +25,7 @@ article {
 }
 
 article h2 {
+    color: rgb(203, 203, 203);
     font-size: 1.2em;
     margin-bottom: 50px;
 }
@@ -46,7 +47,7 @@ article h2 {
 }
 
 .author-info {
-    
+    color: rgb(203, 203, 203);
     display: flex;
     text-align: left;
 }
@@ -70,13 +71,20 @@ article h2 {
 
 
 #btnbtn{
-    background-color: #fff;   
-    color: black;
+    background-color: #222;   
+    color: rgb(203, 203, 203);
     border: 1px solid gray;
-    border-radius: 20%;
+    border-radius: 20px;
     padding: 5px 10px;
     margin-left: 10px;
     cursor: pointer; 
+    transition: background-color 0.3s ease;
+}
+
+#btnbtn:hover{
+    background-color: lightgray;
+    cursor: pointer;
+    color: #000;
 }
 
 .post-content {
@@ -100,6 +108,7 @@ article h2 {
 
 .post-article{
     text-align: center;
+    color: rgb(203, 203, 203);
 }
 
 .post-stats {
@@ -108,24 +117,53 @@ article h2 {
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
-    border-radius: 5px;
     text-align: center;
+    gap: 10px;
 }
 
-.stats{
+.stats {
     display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
     width: 30%;
     height: 100%;
-    background-color: #999;
-    border-color: black;
-    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #444;
+    position: relative;
+    transition: transform 0.2s ease-in-out, color 0.3s ease;
 }
 
-#likesCount:hover{
+.stats:hover {
+    transform: scale(1.05);
+    color: #f44788;
     cursor: pointer;
 }
+
+.heart {
+    display: inline-block;
+    margin-left: 5px;
+    position: relative;
+    transition: transform 0.2s ease-in-out;
+}
+
+#likesCount:hover .heart {
+    animation: float-heart 0.5s ease-out;
+    color: #f44788;
+}
+
+@keyframes float-heart {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.2);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
 
 .comments-section {
     width: 544px;
@@ -152,7 +190,7 @@ article h2 {
 
 .comment-submit {
     align-self: flex-end; 
-    background-color: #ACA0EB;
+    background-color: #f08bb2;
     color: black;
     transition: background-color 0.3s ease;
     border-radius: 13px;
@@ -233,14 +271,14 @@ article h2 {
 }
 
 #ok{
-    background-color: #ACA0EB;
+    background-color: #f08bb2;
     color: black;
     transition: background-color 0.3s ease;
 }
 
 #ok:hover{
     cursor:pointer;
-    background-color: #7F6AEE;
+    background-color: #F44788;
 }
 
 .delete-modal-group{
@@ -305,12 +343,12 @@ article h2 {
 }
 
 #comment-ok{
-    background-color: #ACA0EB;
+    background-color: #f08bb2;
     color: black;
     transition: background-color 0.3s ease;
 }
 
 #comment-ok:hover{
     cursor:pointer;
-    background-color: #7F6AEE;
+    background-color: #F44788;
 }
