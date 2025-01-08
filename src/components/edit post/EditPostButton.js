@@ -5,7 +5,7 @@ import { useHandleLocation } from '../../utils/handleLocation';
 function EditPostButton() {
 
   const handleLocation = useHandleLocation();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -45,14 +45,16 @@ function EditPostButton() {
         saveLocalStorage('content', content);
         saveLocalStorage('updatePostDate', date);
 
-         const reader = new FileReader();
-         reader.onload = (e) => {
-           const base64Data = e.target.result;
-           console.log('Base64로 변환된 데이터:', base64Data);
-           saveLocalStorage('image', base64Data);
-         };
-         reader.readAsDataURL(image); 
-
+         if(image){
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const base64Data = e.target.result;
+            console.log('Base64로 변환된 데이터:', base64Data);
+            saveLocalStorage('image', base64Data);
+          };
+          reader.readAsDataURL(image); 
+         }
+      
         handleLocation('/posts');
       } else {
         alert(`${data.data}`);
