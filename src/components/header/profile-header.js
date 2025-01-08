@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLocalStorage } from '../../utils/session';
-import { handleLocation } from '../../utils/handleLocation';
-
+import { useHandleLocation } from '../../utils/handleLocation';
 import '../../styles/common/header/profile-header.css';
 
 const ProfileHeader = ({ title }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
+  const handleLocation = useHandleLocation();
   const profile = getLocalStorage('profile');
   
   const toggleDropdown = () => {

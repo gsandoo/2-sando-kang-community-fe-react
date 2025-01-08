@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { handleLocation } from "../../utils/handleLocation";
+import { useHandleLocation }from "../../utils/handleLocation";
 import { emailValidCheck, pwValidCheck } from '../../utils/validation';
 import '../../styles/auth/signup/signupForm.css';
 
@@ -15,6 +15,8 @@ const SignUpForm = ({ onInputChange, onSubmit, onValidate, isActive }) => {
   const [nicknameError, setNicknameError] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
 
+  const handleLocation = useHandleLocation();
+  
   const validateForm = () => {
     let isValid = true;
 

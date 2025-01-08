@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { getLocalStorage, saveLocalStorage } from "../../utils/session";
-import { handleLocation } from "../../utils/handleLocation";
+import { useHandleLocation }from "../../utils/handleLocation";
 
 import "../../styles/post/post.css";
 
 const PostField = ({ post }) => {
+
+  const handleLocation = useHandleLocation();
   const postDetails = JSON.parse(localStorage.getItem("postDetails"));
   const profile = postDetails.profile;
 

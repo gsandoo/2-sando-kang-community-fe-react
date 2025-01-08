@@ -1,8 +1,11 @@
 import React from 'react';
 import { saveLocalStorage, getLocalStorage } from '../../utils/session';
-import { handleLocation } from '../../utils/handleLocation';
+import { useHandleLocation } from '../../utils/handleLocation';
 
 function EditPostButton() {
+
+  const handleLocation = useHandleLocation();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 

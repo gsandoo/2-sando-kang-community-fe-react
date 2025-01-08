@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { saveLocalStorage } from "../../utils/session";
-import { handleLocation } from "../../utils/handleLocation";
+import { useHandleLocation } from "../../utils/handleLocation";
 import { useInView } from "react-intersection-observer";
 import { Rings } from "react-loader-spinner"; 
 
@@ -10,7 +10,8 @@ const PostsList = () => {
   const [hasMore, setHasMore] = useState(true);
   const pageRef = useRef(1);
   const { ref, inView } = useInView({ threshold: 0.1 });
-
+  const handleLocation = useHandleLocation();
+  
   const fetchPosts = async () => {
     if (isLoading || !hasMore) return;
 

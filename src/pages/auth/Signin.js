@@ -3,7 +3,7 @@ import ProfileContainer from "../../components/container/profile-container";
 import Header from "../../components/header/Header4";
 import ProfileImageUploader from "../../components/profile/ProfileImageUploader";
 import SignUpForm from "../../components/signup/SignUpForm";
-import { handleLocation } from "../../utils/handleLocation";
+import { useHandleLocation }from "../../utils/handleLocation";
 import "../../styles/auth/signup/signup.css";
 
 const SignUp = () => {
@@ -16,6 +16,8 @@ const SignUp = () => {
     profile: ""
   });
 
+  const handleLocation = useHandleLocation();
+  
   const handleInputChange = (key, value) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };

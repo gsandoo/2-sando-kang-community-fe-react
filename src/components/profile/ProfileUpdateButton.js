@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { handleLocation } from '../../utils/handleLocation';
+import { useHandleLocation } from '../../utils/handleLocation';
 import { getLocalStorage, saveLocalStorage } from '../../utils/session';
 
 const ProfileUpdateButton = ({ nickname, setError, error, file }) => {
   const [toastVisible, setToastVisible] = useState(false);
 
+  const handleLocation = useHandleLocation();
   const handleUpdate = async () => {
     
     const formData = new FormData();

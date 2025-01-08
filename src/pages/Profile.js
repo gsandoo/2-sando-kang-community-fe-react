@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getLocalStorage } from '../utils/session';
-import { handleLocation } from '../utils/handleLocation';
+import { useHandleLocation } from '../utils/handleLocation';
 import ProfileContainer from '../components/container/profile-container';
 import ProfileHeader from '../components/header/profile-header'; 
 import ProfileUpdateButton from '../components/profile/ProfileUpdateButton';
@@ -18,6 +18,8 @@ const Profile = () => {
   const [file, setFile] = useState();
   const [nickname, setNickname] = useState(getLocalStorage('nickname') || ''); 
   const [error, setError] = useState(''); 
+  
+  const handleLocation = useHandleLocation();
   
   const handleWithdraw = () => {
     setModalVisible(true); 
@@ -42,7 +44,7 @@ const Profile = () => {
         if (data.success) {
           alert('회원 탈퇴가 완료되었습니다.');
           setModalVisible(false);
-          handleLocation('/');
+          handleLocation('/login');
         } else {
           if (data.message.status === 40104) {
             alert(data.message.code);

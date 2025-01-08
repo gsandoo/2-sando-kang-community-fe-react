@@ -1,11 +1,19 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { getLocalStorage } from './utils/session'; 
+import { Navigate, Outlet } from 'react-router-dom';
+import { getLocalStorage } from './utils/session';
 
 const PrivateRoute = ({ children }) => {
-  const token = getLocalStorage('jwtToken'); 
+  const token = getLocalStorage('jwtToken');
+  console.log('Token:', token); // 디버깅용
 
-  return token ? children : <Navigate to="/login" replace />;
+  if (!token) {
+    console.log('Redirecting to login');
+    return <Navigate to="/login" replace />;
+  }
+
+  console.log('Rendering protected content');
+  return children;
 };
+
 
 export default PrivateRoute;

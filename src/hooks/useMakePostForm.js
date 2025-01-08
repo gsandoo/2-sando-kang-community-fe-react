@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { saveLocalStorage, getLocalStorage } from '../utils/session';
-import { handleLocation } from '../utils/handleLocation';
+import { useHandleLocation }from '../utils/handleLocation';
 
 const useMakePostForm = () => {
+
+  const handleLocation = useHandleLocation();
+  
   const [formData, setFormData] = useState({
     title: '',
     content: '',

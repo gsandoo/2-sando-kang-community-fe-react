@@ -4,7 +4,7 @@ import Header from "../../components/header/Header3";
 import LoginForm from "../../components/login/LoginForm";
 import LoginButton from "../../components/login/LoginButton";
 import SignUpButton from "../../components/login/SignUpButton";
-import { handleLocation } from "../../utils/handleLocation";
+import { useHandleLocation }from "../../utils/handleLocation";
 import { saveLocalStorage } from "../../utils/session";
 
 import '../../styles/auth/login/login.css';
@@ -15,6 +15,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const handleLocation = useHandleLocation();
 
   const handleInputChange = (key, value) => {
     setFormData((prev) => ({ ...prev, [key]: value }));

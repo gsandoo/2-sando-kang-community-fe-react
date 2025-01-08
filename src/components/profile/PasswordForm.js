@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { pwValidCheck} from '../../utils/validation';  // 유효성 검사 함수
 import { getLocalStorage, saveLocalStorage } from '../../utils/session';
-import { handleLocation } from '../../utils/handleLocation';
-
+import { useHandleLocation } from '../../utils/handleLocation';
 const PasswordForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -14,6 +13,8 @@ const PasswordForm = () => {
     validateForm();
   }, [password, confirmPassword]);
 
+  const handleLocation = useHandleLocation();
+  
   const validateForm = () => {
     let pwCheck = false;
     let cfPwCheck = false;
