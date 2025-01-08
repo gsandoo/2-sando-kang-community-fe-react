@@ -118,7 +118,7 @@ const PostField = ({ post }) => {
 
         <div className="author">
           <div className="avatar">
-            <img src={profile || "/assets/images/default-avatar.png"} alt="avatar" />
+            <img src={profile || "/assets/images/default-avatar.png"} alt="" />
           </div>
           <div className="author-info">
             <span className="author-name">{post.author || "알 수 없음"}</span>
@@ -126,7 +126,7 @@ const PostField = ({ post }) => {
           </div>
 
           <div className="post-actions">
-            {post.user_id == getLocalStorage("userId") && (
+            {post.user_id === getLocalStorage("userId") && (
               <>
                 <div className="edit" id="btnbtn" onClick={handleModify}>
                   수정
