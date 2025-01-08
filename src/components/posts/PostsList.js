@@ -11,7 +11,7 @@ const PostsList = () => {
   const pageRef = useRef(1);
   const { ref, inView } = useInView({ threshold: 0.1 });
   const handleLocation = useHandleLocation();
-  
+
   const fetchPosts = async () => {
     if (isLoading || !hasMore) return;
 
@@ -76,7 +76,7 @@ const PostsList = () => {
           </div>
           <div className="author">
             <div className="avatar">
-              <img src={post.profile} alt="profile" />
+              <img src={post.profile} alt="" />
             </div>
             <span>{post.author || "Unknown Author"}</span>
           </div>
