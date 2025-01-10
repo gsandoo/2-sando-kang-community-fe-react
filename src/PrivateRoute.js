@@ -4,7 +4,6 @@ import { getLocalStorage } from './utils/session';
 
 const PrivateRoute = ({ children }) => {
   const token = getLocalStorage('jwtToken');
-  console.log('Token:', token); // 디버깅용
 
   if (!token) {
     console.log('Redirecting to login');

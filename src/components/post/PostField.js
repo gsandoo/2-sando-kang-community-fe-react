@@ -126,7 +126,7 @@ const PostField = ({ post }) => {
           </div>
 
           <div className="post-actions">
-            {post.user_id === getLocalStorage("userId") && (
+            {post.user_id == getLocalStorage("userId") && (
               <>
                 <div className="edit" id="btnbtn" onClick={handleModify}>
                   수정
